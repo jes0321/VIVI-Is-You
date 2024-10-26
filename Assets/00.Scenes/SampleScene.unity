@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 497599987}
   - component: {fileID: 497599986}
   - component: {fileID: 497599988}
+  - component: {fileID: 497599989}
   m_Layer: 0
   m_Name: VIVI
   m_TagString: Untagged
@@ -374,8 +375,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec710ffb424e4d54ba93d289f0aa350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfoSo: {fileID: 11400000, guid: 1a077ea30186fa94f8bb5c969a5990dd, type: 2}
   inputReader: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
+--- !u!114 &497599989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497599985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee79f82dae86a045b6126268cba0153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapInfoSo: {fileID: 11400000, guid: 1a077ea30186fa94f8bb5c969a5990dd, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
