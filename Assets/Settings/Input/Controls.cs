@@ -35,6 +35,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rollback"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2d26885-5f9e-425a-b1e1-89c56b027c06"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67ebabde-e747-4af1-ad3b-435cdca4d5a5"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rollback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -118,6 +138,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Rollback = m_Player.FindAction("Rollback", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -185,11 +206,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Rollback;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Rollback => m_Wrapper.m_Player_Rollback;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,6 +225,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Rollback.started += instance.OnRollback;
+            @Rollback.performed += instance.OnRollback;
+            @Rollback.canceled += instance.OnRollback;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -209,6 +235,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Rollback.started -= instance.OnRollback;
+            @Rollback.performed -= instance.OnRollback;
+            @Rollback.canceled -= instance.OnRollback;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -238,5 +267,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnRollback(InputAction.CallbackContext context);
     }
 }

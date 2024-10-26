@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Rollback",
+                    "type": "Button",
+                    "id": "d2d26885-5f9e-425a-b1e1-89c56b027c06",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "67ebabde-e747-4af1-ad3b-435cdca4d5a5",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rollback",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
