@@ -11,7 +11,6 @@ public class MapInfoSO : ScriptableObject
     {
         _floorTilemap = floorTilemap;
         _colliderTilemap = colliderTilemap;
-
     }
 
     public Vector3 CellCenterPos(Vector3 pos, Vector2Int dir)
@@ -19,9 +18,17 @@ public class MapInfoSO : ScriptableObject
         Vector3Int curPos = _floorTilemap.WorldToCell(pos);
 
         Vector3Int nextPos = curPos + new Vector3Int(dir.x,dir.y,0);
+
+        Vector3 worldPos;
         
-        Vector3 worldPos = _floorTilemap.GetCellCenterWorld(nextPos);
+        if (CanMoveThis(nextPos)) worldPos = _floorTilemap.GetCellCenterWorld(nextPos);
+        else worldPos = _floorTilemap.GetCellCenterWorld(curPos);
         
         return worldPos;
+    }
+
+    public bool CanMoveThis(Vector3Int pos)
+    {
+        return _floorTilemap.HasTile(pos) && !_colliderTilemap.HasTile(pos);
     }
 }
