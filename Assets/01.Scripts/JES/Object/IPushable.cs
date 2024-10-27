@@ -1,16 +1,8 @@
 using System;
 using UnityEngine;
 
-public class IPushable :MonoBehaviour
+public interface IPushable
 {
-    public MoveCompo moveCompo{get;set;}
-
-    public void Initalize(MoveCompo move)
-    {
-        moveCompo = move;
-    }
-    public void MoveSubject(Vector2 dir)
-    {
-        moveCompo.MoveAgent(dir);
-    }
+    public bool IsPushable { get; set; }
+    public void MoveObject(Vector2 dir);
 }

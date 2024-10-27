@@ -9,13 +9,7 @@ public class MoveCompo : MonoBehaviour
     private float lastMoveTime = 0.0f;
     
     [SerializeField] private MapInfoSO mapInfoSo;
-    [SerializeField] private  InputReader _inputReader;
-
- 
-    private void Start()
-    {
-        _inputReader.OnRollbackEvent += HandleRollback;
-    }
+    
     #region MoveAgent
 
     public bool MoveAgent(Vector2 obj, bool isRoll = false)
@@ -39,6 +33,8 @@ public class MoveCompo : MonoBehaviour
             moveVector.y = 0;
         }
 
+        PushDitect(moveVector);
+        
         if (!isRoll)
         {
             _rollbackVecList.Push(moveVector*-1);
@@ -52,7 +48,7 @@ public class MoveCompo : MonoBehaviour
 
     private Stack<Vector2> _rollbackVecList = new Stack<Vector2>();
     private bool _isRollback => _rollbackVecList.Count != 0;
-    private void HandleRollback()
+    public void HandleRollback()
     {
         if(!_isRollback) return;
         
@@ -63,8 +59,31 @@ public class MoveCompo : MonoBehaviour
 
     #endregion
 
-    private void OnDisable()
+    #region Push
+
+    private void PushDitect(Vector2 Vec)
     {
-        _inputReader.OnRollbackEvent -= HandleRollback;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vec,1f);
+
+        // 레이가 충돌한 경우 IPushable 인터페이스가 있는지 확인
+        if (hit.collider != null)
+        {
+            IPushable pushable = hit.collider.GetComponent<IPushable>();
+            if (pushable != null && pushable.IsPushable)
+            {
+                Debug.Log("IPushable 객체 감지됨!");
+                pushable.MoveObject(Vec); // 감지된 객체에 동작 수행
+            }
+            else
+            {
+                Debug.Log("IPushable이 아니거나 Pushable 상태 아님.");
+            }
+        }
+        else
+        {
+            Debug.Log("레이가 아무 객체와도 충돌하지 않음.");
+        }
     }
+
+    #endregion
 }

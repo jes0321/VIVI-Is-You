@@ -16,7 +16,6 @@ public class YouState : State
     private void HandleOnMovement(Vector2 obj)
     {
         _agent.moveCompo.MoveAgent(obj);
-
     }
 
    
