@@ -13,6 +13,6 @@ public abstract class Object : MonoBehaviour,IPushable
     } 
     public void MoveObject(Vector2 dir)
     {
-        _moveCompo.MoveAgent(dir);
+        _moveCompo.MoveAgent(dir,true);
     }
 }

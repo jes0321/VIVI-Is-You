@@ -13,26 +13,20 @@ public class MoveCompo : MonoBehaviour
 
     #region MoveAgent
 
-    public bool MoveAgent(Vector2 inputVector, bool isRoll = false)
+    public bool MoveAgent(Vector2 inputVector,bool isPush = false, bool isRoll = false)
     {
         if(!(lastMoveTime + moveTime < Time.time)) return false;
        
-        var moveVector = MoveVectorSetting(inputVector,isRoll);
+        var moveVector = MoveVectorSetting(inputVector,isPush,isRoll);
         Vector3 movePos =  mapInfoSo.CellCenterPos(transform.position,moveVector);
         
-        if (movePos == Vector3.zero)
-        {
-            Debug.Log("0이라 스택에서 뺐어");
-            _rollbackVecList.Pop();
-            return false;
-        }
         transform.DOMove(movePos, 0.2f).SetEase(Ease.OutQuint);
         
         lastMoveTime = Time.time;
         return true;
     }
     
-    private Vector2Int MoveVectorSetting(Vector2 inputVector,bool isRoll)
+    private Vector2Int MoveVectorSetting(Vector2 inputVector,bool isPush,bool isRoll)
     {
         Vector2Int moveVector = Vector2Int.RoundToInt(inputVector);
         if (Mathf.Abs(moveVector.x) > 0)
@@ -43,24 +37,9 @@ public class MoveCompo : MonoBehaviour
         if (!isRoll)
         {
             PushDitect(moveVector);
-            _rollbackVecList.Push(moveVector*-1);
+            RollBackManager.Instance.AddRollback(this,moveVector*-1,isPush);
         }
         return moveVector;
-    }
-
-    #endregion
-    
-    #region Rollback
-
-    private Stack<Vector2> _rollbackVecList = new Stack<Vector2>();
-    private bool _isRollback => _rollbackVecList.Count != 0;
-    public void HandleRollback()
-    {
-        if(!_isRollback) return;
-        
-        Vector2 move =  _rollbackVecList.Pop();
-        
-        if (!MoveAgent(move, true)) _rollbackVecList.Push(move);
     }
 
     #endregion
