@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec710ffb424e4d54ba93d289f0aa350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
+  <inputReader>k__BackingField: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
 --- !u!114 &497599989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapInfoSo: {fileID: 11400000, guid: 1a077ea30186fa94f8bb5c969a5990dd, type: 2}
+  _inputReader: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
