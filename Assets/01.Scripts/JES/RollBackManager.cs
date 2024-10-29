@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class RollBackManager : MonoSingleton<RollBackManager>
 {
-    private float _limitTime = 0.13f;
-    private float _lastTime=0f;
-    [SerializeField] private InputReader _inputReader;
+    private float _limitTime = 0.13f; //쿨타임
+    private float _lastTime=0f;//마지막 타임
+    [SerializeField] private InputReader _inputReader;//인풋리더
     
     private Stack<List<RollBackData>> _rollBackStack = new Stack<List<RollBackData>>();
     private List<RollBackData> _dummyList = new List<RollBackData>();
     private void Awake()
     {
         _inputReader.OnRollbackEvent += HandleRollback;
+    }
+
+    private void OnDestroy()
+    {
+        _inputReader.OnRollbackEvent -= HandleRollback;
     }
 
     private void HandleRollback()
@@ -51,7 +56,6 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     }
 
 }
-[Serializable]
 public struct RollBackData
 {
     public Vector2 moveDir;
