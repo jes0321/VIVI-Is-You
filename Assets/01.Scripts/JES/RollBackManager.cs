@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class RollBackManager : MonoSingleton<RollBackManager>
 {
+    private float _limitTime = 0.13f;
+    private float _lastTime=0f;
     [SerializeField] private InputReader _inputReader;
     
     private Stack<List<RollBackData>> _rollBackStack = new Stack<List<RollBackData>>();
-
+    private List<RollBackData> _dummyList = new List<RollBackData>();
     private void Awake()
     {
         _inputReader.OnRollbackEvent += HandleRollback;
@@ -16,37 +18,36 @@ public class RollBackManager : MonoSingleton<RollBackManager>
 
     private void HandleRollback()
     {
-        if(_rollBackStack.Count == 0) return;
-        
+        if(_rollBackStack.Count == 0||_lastTime+_limitTime>Time.time) return;
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
-
+        
         foreach (var data in dataList)
         {
-            if (false==data.moveCompo.MoveAgent(data.moveDir, false, true))
+            if (false==data.moveCompo.MoveAgent(data.moveDir,true))
             {
                 _rollBackStack.Push(dataList);
-                break;
+                _lastTime = 0;
+                return;
             } 
         }
+        _lastTime = Time.time;
     }
 
-    public void AddRollback(MoveCompo moveCompo, Vector2 dir, bool isPush = false)
+    public void AddRollback(MoveCompo moveCompo, Vector2 dir)
     {
-        List<RollBackData> dataList = new List<RollBackData>();
         RollBackData rollbackData =  new RollBackData() { moveCompo = moveCompo, moveDir = dir };
-
-        if (isPush)
-        { 
-            dataList = _rollBackStack.Pop();
-            dataList.Add(rollbackData);
-        }
-        else
-        {
-            dataList.Add(rollbackData);
-        }
         
-        _rollBackStack.Push(dataList);
+        _dummyList.Add(rollbackData);
+    }
+
+    public void ListReset()
+    {
+        if(_dummyList.Count == 0) return;
+
+        _rollBackStack.Push(_dummyList);
+        
+        _dummyList = new List<RollBackData>();
     }
 
 }

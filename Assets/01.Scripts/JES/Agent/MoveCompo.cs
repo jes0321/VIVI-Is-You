@@ -7,26 +7,27 @@ using UnityEngine.Assertions.Must;
 
 public class MoveCompo : MonoBehaviour
 {
-    private float moveTime = 0.2f;
+    private float moveTime = 0.12f;
     private float lastMoveTime = 0.0f;
     [SerializeField] private MapInfoSO mapInfoSo;
 
     #region MoveAgent
 
-    public bool MoveAgent(Vector2 inputVector,bool isPush = false, bool isRoll = false)
+    public bool MoveAgent(Vector2 inputVector,bool isRoll = false)
     {
         if(!(lastMoveTime + moveTime < Time.time)) return false;
        
-        var moveVector = MoveVectorSetting(inputVector,isPush,isRoll);
-        Vector3 movePos =  mapInfoSo.CellCenterPos(transform.position,moveVector);
+        var moveVector = MoveVectorSetting(inputVector,isRoll);
         
-        transform.DOMove(movePos, 0.2f).SetEase(Ease.OutQuint);
+        if(moveVector == Vector3.zero) return false;
+        
+        transform.DOMove(moveVector, 0.12f).SetEase(Ease.OutQuint);
         
         lastMoveTime = Time.time;
         return true;
     }
     
-    private Vector2Int MoveVectorSetting(Vector2 inputVector,bool isPush,bool isRoll)
+    private Vector3 MoveVectorSetting(Vector2 inputVector,bool isRoll)
     {
         Vector2Int moveVector = Vector2Int.RoundToInt(inputVector);
         if (Mathf.Abs(moveVector.x) > 0)
@@ -34,12 +35,14 @@ public class MoveCompo : MonoBehaviour
             moveVector.y = 0;
         }
         
-        if (!isRoll)
+        Vector3 movePos =  mapInfoSo.CellCenterPos(transform.position,moveVector);
+        
+        if (!isRoll&&movePos!=Vector3.zero)
         {
             PushDitect(moveVector);
-            RollBackManager.Instance.AddRollback(this,moveVector*-1,isPush);
+            RollBackManager.Instance.AddRollback(this,moveVector*-1);
         }
-        return moveVector;
+        return movePos;
     }
 
     #endregion
