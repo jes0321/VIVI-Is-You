@@ -22,7 +22,7 @@ public class MapInfoSO : ScriptableObject
         Vector3 worldPos;
         
         if (CanMoveThis(nextPos)) worldPos = _floorTilemap.GetCellCenterWorld(nextPos);
-        else worldPos = _floorTilemap.GetCellCenterWorld(curPos);
+        else worldPos = Vector3.zero;
         
         return worldPos;
     }
