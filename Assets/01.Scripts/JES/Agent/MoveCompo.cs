@@ -39,7 +39,10 @@ public class MoveCompo : MonoBehaviour
         
         if (!isRoll&&movePos!=Vector3.zero)
         {
-            PushDitect(moveVector);
+            if (!PushDitect(moveVector))
+            {
+                return Vector3.zero;
+            }
             RollBackManager.Instance.AddRollback(this,moveVector*-1);
         }
         return movePos;
@@ -49,7 +52,7 @@ public class MoveCompo : MonoBehaviour
 
     #region Push
 
-    private void PushDitect(Vector2 Vec)
+    private bool PushDitect(Vector2 Vec)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position+new Vector3(Vec.x*0.6f,Vec.y*0.6f,0), Vec,0.4f);
     
@@ -61,19 +64,21 @@ public class MoveCompo : MonoBehaviour
                 if (pushable.IsPushable)
                 {
                     Debug.Log("IPushable 객체 감지됨!");
-                    pushable.MoveObject(Vec); // 감지된 객체에 동작 수행
+                    return pushable.MoveObject(Vec);
                 }
+                return false;
             }
             else
             {
-                Debug.Log(hit.collider.gameObject.name);
                 Debug.Log("IPushable이 아니거나 Pushable 상태 아님.");
             }
         }
         else
-        {
+        { 
             Debug.Log("레이가 아무 객체와도 충돌하지 않음.");
         }
+
+        return true;
     } 
     #endregion
     
