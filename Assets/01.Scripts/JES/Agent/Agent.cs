@@ -4,9 +4,16 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+public enum AgentType
+{
+    VIVI,WALL,BOX,DOOR
+}
 public abstract class Agent : MonoBehaviour
 {
     protected StateMachine _stateMachine;
+    
+    public AgentType AgentType;
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
     protected virtual void Awake()
@@ -27,3 +34,4 @@ public enum StateType
 {
     You,Stop,Wait
 }
+
