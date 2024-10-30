@@ -11,8 +11,8 @@ public abstract class Object : MonoBehaviour,IPushable
     {
         _moveCompo = GetComponent<MoveCompo>();
     } 
-    public void MoveObject(Vector2 dir)
+    public bool MoveObject(Vector2 dir)
     {
-        _moveCompo.MoveAgent(dir);
+       return _moveCompo.MoveAgent(dir);
     }
 }
