@@ -7,7 +7,7 @@ public abstract class Object : MonoBehaviour,IPushable
     private MoveCompo _moveCompo;
     public bool IsPushable { get; set; } = true;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _moveCompo = GetComponent<MoveCompo>();
     } 
