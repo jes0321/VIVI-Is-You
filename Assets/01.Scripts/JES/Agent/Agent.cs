@@ -12,7 +12,7 @@ public enum AgentType
 public abstract class Agent : MonoBehaviour
 {
     protected StateMachine _stateMachine;
-    
+
     public AgentType AgentType;
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
@@ -23,6 +23,11 @@ public abstract class Agent : MonoBehaviour
         _stateMachine.AddState(StateType.You, new YouState(this, _stateMachine));
         
         moveCompo = GetComponent<MoveCompo>();
+    }
+    public void UpdateData(AgentDataSO data)
+    {
+        GetComponent<SpriteRenderer>().sprite = data._sprite;
+        AgentType = data._type;
     }
     private void Update()
     {
