@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class Object : MonoBehaviour,IPushable
+public class Object : MonoBehaviour,IPushable
 {
     private MoveCompo _moveCompo;
     public bool IsPushable { get; set; } = true;
