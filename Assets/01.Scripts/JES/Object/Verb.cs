@@ -16,11 +16,10 @@ public abstract class Verb : Object
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
     }
 
-    private void DirectObject()
+    private void DirectObject() //양쪽 감지하는 코드
     {
-        
     }
-    //양쪽 감지하는 코드
+   
 
     /// <summary>
     /// agent 받아와서 동사 적용시켜주는 함수
