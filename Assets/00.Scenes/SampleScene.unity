@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb6ac0d41812e4683ca40ca4c140ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agentType: 0
 --- !u!114 &370186621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1958875639
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -598,7 +599,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1958875639
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -638,6 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb6ac0d41812e4683ca40ca4c140ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agentType: 0
 --- !u!58 &442596814
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -762,7 +764,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1958875639
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -802,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec710ffb424e4d54ba93d289f0aa350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AgentType: 0
   <inputReader>k__BackingField: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
 --- !u!114 &497599989
 MonoBehaviour:
@@ -1113,7 +1116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1958875639
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0.9811888, a: 1}
@@ -1216,6 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb6ac0d41812e4683ca40ca4c140ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agentType: 0
 --- !u!1 &1212039727
 GameObject:
   m_ObjectHideFlags: 0
@@ -4266,6 +4270,6 @@ SceneRoots:
   - {fileID: 105261511}
   - {fileID: 497599987}
   - {fileID: 990839969}
-  - {fileID: 442596812}
   - {fileID: 370186623}
+  - {fileID: 442596812}
   - {fileID: 239244631}
