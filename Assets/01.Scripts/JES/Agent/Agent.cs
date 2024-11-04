@@ -12,7 +12,7 @@ public enum AgentType
 public abstract class Agent : MonoBehaviour
 {
     protected StateMachine _stateMachine;
-
+    
     public AgentType AgentType;
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}

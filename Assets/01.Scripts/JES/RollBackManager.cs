@@ -7,7 +7,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
 {
     private float _limitTime = 0.13f; //쿨타임
     private float _lastTime=0f;//마지막 타임
-    [SerializeField] private InputReader _inputReader;//인풋리더
+    public InputReader _inputReader;//인풋리더
     
     private Stack<List<RollBackData>> _rollBackStack = new Stack<List<RollBackData>>();
     private List<RollBackData> _dummyList = new List<RollBackData>();

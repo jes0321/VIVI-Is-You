@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class YouState : State
 {
-   
+    
     public YouState(Agent agent, StateMachine stateMachine) : base(agent, stateMachine)
     {
     }

@@ -9,11 +9,17 @@ public class InputReader : ScriptableObject, IPlayerActions
     private Controls _controls;
     public event Action<Vector2> OnMovementEvent;
     public event Action OnRollbackEvent;
+
+    public event Action OnTurnEndEvent;
     private void OnEnable()
     {
         _controls = new Controls();
         _controls.Player.SetCallbacks(this);
         _controls.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        _controls.Player.Disable();
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -22,6 +28,7 @@ public class InputReader : ScriptableObject, IPlayerActions
         {
             OnMovementEvent?.Invoke(movement);
         }
+        if(context.canceled) OnTurnEndEvent?.Invoke();
     }
     public void OnRollback(InputAction.CallbackContext context)
     {
