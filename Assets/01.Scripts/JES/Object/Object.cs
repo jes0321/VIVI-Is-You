@@ -16,3 +16,8 @@ public abstract class Object : MonoBehaviour,IPushable
        return _moveCompo.MoveAgent(dir);
     }
 }
+
+public enum VerbType
+{
+    Is,Has,Make
+}
