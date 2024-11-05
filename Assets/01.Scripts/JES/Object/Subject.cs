@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using UnityEditor.Analytics;
 using UnityEngine;
 
 public class Subject : Object
@@ -13,7 +14,7 @@ public class Subject : Object
     {
         base.Awake();
 
-        GetComponents<Agent>().ToList().ForEach(agent =>
+        FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
         {
             if (_agentType == agent.AgentType) _agents.Add(agent);
         });
