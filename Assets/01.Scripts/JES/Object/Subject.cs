@@ -54,12 +54,14 @@ public class Subject : Object, IVerbable
     private void DicSetting()
     {
         VerbApply rightApply = new VerbApply();
+        rightApply.IsApply = new NotifyValue<bool>();
         rightApply.IsApply.Value = false;
         rightApply.IsApply.OnValueChanged += RightVerbCancel;
         
         _isVerbApplyInfoDic.Add(Vector2.right, rightApply);
         
         VerbApply upApply = new VerbApply();
+        upApply.IsApply = new NotifyValue<bool>();
         upApply.IsApply.Value = false;
         upApply.IsApply.OnValueChanged += UpVerbCancel;
         
