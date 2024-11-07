@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class MapInfoSO : ScriptableObject
 {
     private Tilemap _floorTilemap,_colliderTilemap;
+    public Tilemap ColliderTilemap => _colliderTilemap;
 
     public void Initalize(Tilemap floorTilemap, Tilemap colliderTilemap)
     {
