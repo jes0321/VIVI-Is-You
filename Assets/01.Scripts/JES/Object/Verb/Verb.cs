@@ -25,26 +25,19 @@ public abstract class Verb : Object
     private void ShootRayAndApply(Vector2 dir)
     {
         RaycastHit2D ray = Physics2D.Raycast(transform.position, dir, 1);
-        if (ray.collider != null)
+        if (ray.collider != null&&ray.collider.TryGetComponent(out Subject subject))
         {
-            if (ray.collider.TryGetComponent(out Subject subject))
+            RaycastHit2D otherRay = Physics2D.Raycast(transform.position, -dir, 1);
+            if (otherRay.collider != null&&otherRay.collider.TryGetComponent(out IVerbable verbable))
             {
-                RaycastHit2D otherRay = Physics2D.Raycast(transform.position, -dir, 1);
-                if (otherRay.collider != null)
-                {
-                    if (otherRay.collider.TryGetComponent(out IVerbable verbable))
-                    {
-                        verbable.VerbApply(subject.GetAgents());
-                    }
-                }
+                if(subject.IsApply(dir,verbable.VerbCancel))
+                    ApplyVerb(subject, verbable);
             }
         }
     }
-
-
     /// <summary>
     /// agent 받아와서 동사 적용시켜주는 함수
     /// </summary>
     /// <param name="agents"></param>
-    protected abstract void ApplyVerb(List<Agent> agents);
+    protected abstract void ApplyVerb(Subject subject, IVerbable verbable);
 }
