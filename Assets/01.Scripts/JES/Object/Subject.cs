@@ -14,14 +14,23 @@ public class Subject : Object, IVerbable
 
         DicSetting();
         
-        FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
-        {
-            if (_agentData._type == agent.AgentType) _agentData.agents.Add(agent);
-        });
+        
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
-    
+
+    private void Start()
+    {
+        FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
+        {
+            if (_agentData._type == agent.AgentType)
+            {
+                if(!_agentData.agents.Contains(agent))
+                    _agentData.agents.Add(agent);
+            }
+        });
+    }
+
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
