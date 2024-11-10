@@ -13,13 +13,13 @@ public class Subject : Object, IVerbable
         base.Awake();
 
         DicSetting();
-        
+        _agentData.agents.Clear();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
         {

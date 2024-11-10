@@ -9,8 +9,4 @@ public class AgentDataSO : ScriptableObject
     public AgentType _type;
     public List<Agent> agents = new List<Agent>();
 
-    private void OnEnable()
-    {
-        agents.Clear();
-    }
 }
