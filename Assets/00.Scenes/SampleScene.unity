@@ -4756,6 +4756,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agentData: {fileID: 11400000, guid: 751b57d5b31af0b499d04d77c69f6f0e, type: 2}
+  right:
+    IsApply:
+      _value: 0
+    name: 
+  up:
+    IsApply:
+      _value: 0
+    name: 
 --- !u!114 &1777210898
 MonoBehaviour:
   m_ObjectHideFlags: 0

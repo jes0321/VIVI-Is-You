@@ -32,7 +32,7 @@ public abstract class Verb : Object
             RaycastHit2D otherRay = Physics2D.Raycast(transform.position+-padding, -dir, 1);
             if (otherRay.collider != null&&otherRay.collider.TryGetComponent(out IVerbable verbable))
             {
-                if(subject.IsApply(dir,(agn) => verbable.VerbCancel(agn)))
+                if(subject.IsApply(dir,verbable))
                     ApplyVerb(subject, verbable);
             }
         }

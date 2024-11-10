@@ -6,7 +6,7 @@ using UnityEngine;
 public class Subject : Object, IVerbable
 {
     [SerializeField] private AgentDataSO _agentData;
-    private List<Agent> _agents = new List<Agent>();//자신이 조종하는 Agent 리스트
+    private List<Agent> _agents = new List<Agent>();//자신이 조종하는 Agent 리스
     
     private Dictionary<Vector2, VerbApply> _isVerbApplyInfoDic = new Dictionary<Vector2, VerbApply>();
     protected override void Awake()
@@ -63,15 +63,13 @@ public class Subject : Object, IVerbable
         return ray.collider != null && ray.collider.TryGetComponent(out Verb verb);
     }
 
-    public bool IsApply(Vector2 direction, Action<List<Agent>> cancel)
+    public bool IsApply(Vector2 direction, IVerbable verb)
     {
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
-            info.name = "고민수 병신";
-            Debug.Log($"내 키값은{direction}입니다. 제 이름은 {info.name}");
+            info.Target = verb;
             info.IsApply.Value = true;
-            info.CancelAction += cancel;
             return true;
         }
         return false;
@@ -98,8 +96,8 @@ public class Subject : Object, IVerbable
         if (!next)
         {
             VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(Vector2.up);
-            info.CancelAction?.Invoke(_agents);
-            info.CancelAction = null;
+            info.Target.VerbCancel(_agents);
+            info.Target = null;
         }
     }
 
@@ -108,16 +106,14 @@ public class Subject : Object, IVerbable
         if (!after)
         {
             VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
-            Debug.Log($"내 키값은{-Vector2.right}입니다. 제 이름은 {info.name}");
-            info.CancelAction?.Invoke(_agents);
-            info.CancelAction = null;
+            info.Target.VerbCancel(_agents);
+            info.Target = null;
         }
     }
 }
 
-public struct VerbApply
+public class VerbApply
 {
     public NotifyValue<bool> IsApply;
-    public Action<List<Agent>> CancelAction;
-    public string name;
+    public IVerbable Target;
 }
