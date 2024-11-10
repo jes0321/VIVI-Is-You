@@ -13,7 +13,7 @@ public class Subject : Object, IVerbable
         base.Awake();
 
         DicSetting();
-        _agentData.agents.Clear();
+        _agentData.ListReset();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
@@ -47,13 +47,7 @@ public class Subject : Object, IVerbable
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
         });
-        foreach (var data in _isVerbApplyInfoDic)
-        {
-            if (data.Value.IsApply.Value)
-            {
-                data.Value.Target.VerbApply(agents);
-            }
-        }
+        _agentData.verbs.ForEach(verb => VerbApply(agents));
         agents = new List<Agent>();
     }
 
@@ -85,6 +79,7 @@ public class Subject : Object, IVerbable
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
+            _agentData.verbs.Add(verb);
             info.Target = verb;
             info.IsApply.Value = true;
             return true;
@@ -113,9 +108,15 @@ public class Subject : Object, IVerbable
         if (!next)
         {
             VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(Vector2.up);
-            info.Target.VerbCancel(_agentData.agents);
-            info.Target = null;
+            ApplyCancel(info);
         }
+    }
+
+    private void ApplyCancel(VerbApply info)
+    {
+        info.Target.VerbCancel(_agentData.agents);
+        _agentData.verbs.Remove(info.Target);
+        info.Target = null;
     }
 
     private void RightVerbCancel(bool before, bool after)
@@ -123,8 +124,8 @@ public class Subject : Object, IVerbable
         if (!after)
         {
             VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
-            info.Target.VerbCancel(_agentData.agents);
-            info.Target = null;
+            ApplyCancel(info);
+
         }
     }
 }
