@@ -13,6 +13,11 @@ public abstract class Verb : Object
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
 
+    private void Start()
+    {
+        DirectObject();
+    }
+
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;

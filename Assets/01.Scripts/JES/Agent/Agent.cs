@@ -9,7 +9,7 @@ public enum AgentType
 {
     VIVI,WALL,BOX,DOOR
 }
-public abstract class Agent : MonoBehaviour
+public abstract class Agent : MonoBehaviour, IPushable
 {
     protected StateMachine _stateMachine;
     
@@ -32,6 +32,12 @@ public abstract class Agent : MonoBehaviour
     private void Update()
     {
         _stateMachine.UpdateCurState();
+    }
+
+    public bool IsPushable { get; set; } = false;
+    public bool MoveObject(Vector2 dir)
+    {
+        return moveCompo.MoveAgent(dir);
     }
 }
 
