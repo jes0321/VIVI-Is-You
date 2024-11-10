@@ -467,7 +467,7 @@ SpriteRenderer:
   m_SortingLayerID: 1958875639
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a09983d6aaf04754a9ea1b6b64b00685, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1024,12 +1024,12 @@ SpriteRenderer:
   m_SortingLayerID: 1958875639
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 499c505421328e04ebb37e000bd389c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1389,7 +1389,7 @@ SpriteRenderer:
   m_SortingLayerID: 1958875639
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a09983d6aaf04754a9ea1b6b64b00685, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1505,7 +1505,7 @@ SpriteRenderer:
   m_SortingLayerID: 1958875639
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a09983d6aaf04754a9ea1b6b64b00685, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1621,7 +1621,7 @@ SpriteRenderer:
   m_SortingLayerID: 1958875639
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a09983d6aaf04754a9ea1b6b64b00685, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4755,15 +4755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb6ac0d41812e4683ca40ca4c140ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agentData: {fileID: 11400000, guid: 751b57d5b31af0b499d04d77c69f6f0e, type: 2}
-  right:
-    IsApply:
-      _value: 0
-    name: 
-  up:
-    IsApply:
-      _value: 0
-    name: 
+  _agentData: {fileID: 11400000, guid: 64a225fb87336c64daa3cb44046944e6, type: 2}
 --- !u!114 &1777210898
 MonoBehaviour:
   m_ObjectHideFlags: 0

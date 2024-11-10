@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a05e27a71f8ed408a1405f0cbf1dfc, type: 3}
   m_Name: VIVI
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
-  _type: 1
+  _sprite: {fileID: 21300000, guid: 499c505421328e04ebb37e000bd389c1, type: 3}
+  _type: 0
