@@ -6,7 +6,6 @@ using UnityEngine;
 public class Subject : Object, IVerbable
 {
     [SerializeField] private AgentDataSO _agentData;
-    private List<Agent> _agents = new List<Agent>();//자신이 조종하는 Agent 리스
     
     private Dictionary<Vector2, VerbApply> _isVerbApplyInfoDic = new Dictionary<Vector2, VerbApply>();
     protected override void Awake()
@@ -17,7 +16,7 @@ public class Subject : Object, IVerbable
         
         FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
         {
-            if (_agentData._type == agent.AgentType) _agents.Add(agent);
+            if (_agentData._type == agent.AgentType) _agentData.agents.Add(agent);
         });
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
@@ -30,14 +29,14 @@ public class Subject : Object, IVerbable
     }
     public List<Agent> GetAgents()
     {
-        return _agents;
+        return _agentData.agents;
     }
     public void VerbApply(List<Agent> agents)
     {
         agents.ForEach(agent =>
         {
             agent.UpdateData(_agentData);
-            _agents.Add(agent);
+            _agentData.agents.Add(agent);
         });
         agents = new List<Agent>();
     }
@@ -98,7 +97,7 @@ public class Subject : Object, IVerbable
         if (!next)
         {
             VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(Vector2.up);
-            info.Target.VerbCancel(_agents);
+            info.Target.VerbCancel(_agentData.agents);
             info.Target = null;
         }
     }
@@ -108,7 +107,7 @@ public class Subject : Object, IVerbable
         if (!after)
         {
             VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
-            info.Target.VerbCancel(_agents);
+            info.Target.VerbCancel(_agentData.agents);
             info.Target = null;
         }
     }
