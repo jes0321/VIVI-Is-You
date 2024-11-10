@@ -65,11 +65,13 @@ public class Subject : Object, IVerbable
 
     public bool IsApply(Vector2 direction, Action<List<Agent>> cancel)
     {
-        VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(direction);
+        VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
+            info.name = "고민수 병신";
+            Debug.Log($"내 키값은{direction}입니다. 제 이름은 {info.name}");
             info.IsApply.Value = true;
-            info.CancelAction = cancel;
+            info.CancelAction += cancel;
             return true;
         }
         return false;
@@ -81,7 +83,6 @@ public class Subject : Object, IVerbable
         rightApply.IsApply = new NotifyValue<bool>();
         rightApply.IsApply.Value = false;
         rightApply.IsApply.OnValueChanged += RightVerbCancel;
-        
         _isVerbApplyInfoDic.Add(-Vector2.right, rightApply);
         
         VerbApply upApply = new VerbApply();
@@ -106,7 +107,8 @@ public class Subject : Object, IVerbable
     {
         if (!after)
         {
-            VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(-Vector2.right);
+            VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
+            Debug.Log($"내 키값은{-Vector2.right}입니다. 제 이름은 {info.name}");
             info.CancelAction?.Invoke(_agents);
             info.CancelAction = null;
         }
@@ -117,4 +119,5 @@ public struct VerbApply
 {
     public NotifyValue<bool> IsApply;
     public Action<List<Agent>> CancelAction;
+    public string name;
 }

@@ -6,7 +6,6 @@ using UnityEngine.Assertions.Must;
 
 public abstract class Verb : Object
 {
-    private Vector2 dir;
     protected override void Awake()
     {
         base.Awake();
@@ -20,7 +19,6 @@ public abstract class Verb : Object
 
     private void DirectObject() //양쪽 감지하는 코드
     {
-        dir = -Vector2.right;
         ShootRayAndApply(-Vector2.right);
         ShootRayAndApply(Vector2.up);
     }
@@ -44,10 +42,4 @@ public abstract class Verb : Object
     /// </summary>
     /// <param name="agents"></param>
     protected abstract void ApplyVerb(Subject subject, IVerbable verbable);
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position,dir);
-    }
 }
