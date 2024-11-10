@@ -38,6 +38,13 @@ public class Subject : Object, IVerbable
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
         });
+        foreach (var data in _isVerbApplyInfoDic)
+        {
+            if (data.Value.IsApply.Value)
+            {
+                data.Value.Target.VerbApply(agents);
+            }
+        }
         agents = new List<Agent>();
     }
 
