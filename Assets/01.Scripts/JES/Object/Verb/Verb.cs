@@ -10,11 +10,13 @@ public abstract class Verb : Object
     {
         base.Awake();
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
 
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
     }
 
     private void DirectObject() //양쪽 감지하는 코드

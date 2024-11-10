@@ -20,11 +20,13 @@ public class Subject : Object, IVerbable
             if (_agentData._type == agent.AgentType) _agents.Add(agent);
         });
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
     
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
     }
     public List<Agent> GetAgents()
     {
