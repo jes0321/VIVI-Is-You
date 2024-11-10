@@ -19,6 +19,12 @@ public class Subject : Object, IVerbable
         {
             if (_agentData._type == agent.AgentType) _agents.Add(agent);
         });
+        RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
+    }
+    
+    private void OnDestroy()
+    {
+        RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
     }
     public List<Agent> GetAgents()
     {
@@ -38,12 +44,32 @@ public class Subject : Object, IVerbable
     {
         //여긴 해줄게 없다
     }
+    private void DirectObject()
+    {
+        foreach (var data in _isVerbApplyInfoDic)
+        {
+            if (data.Value.IsApply.Value)
+            {
+                data.Value.IsApply.Value = ShootRayAndApply(-data.Key);
+            }
+        }
+    }
+
+    private bool ShootRayAndApply(Vector2 dir)
+    {
+        Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position + padding, dir, 1);
+        
+        return ray.collider != null && ray.collider.TryGetComponent(out Verb verb);
+    }
 
     public bool IsApply(Vector2 direction, Action<List<Agent>> cancel)
     {
-        VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(direction);
+        VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
+            info.name = "고민수 병신";
+            Debug.Log($"내 키값은{direction}입니다. 제 이름은 {info.name}");
             info.IsApply.Value = true;
             info.CancelAction += cancel;
             return true;
@@ -57,8 +83,7 @@ public class Subject : Object, IVerbable
         rightApply.IsApply = new NotifyValue<bool>();
         rightApply.IsApply.Value = false;
         rightApply.IsApply.OnValueChanged += RightVerbCancel;
-        
-        _isVerbApplyInfoDic.Add(Vector2.right, rightApply);
+        _isVerbApplyInfoDic.Add(-Vector2.right, rightApply);
         
         VerbApply upApply = new VerbApply();
         upApply.IsApply = new NotifyValue<bool>();
@@ -82,11 +107,11 @@ public class Subject : Object, IVerbable
     {
         if (!after)
         {
-            VerbApply info =  _isVerbApplyInfoDic.GetValueOrDefault(Vector2.right);
+            VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
+            Debug.Log($"내 키값은{-Vector2.right}입니다. 제 이름은 {info.name}");
             info.CancelAction?.Invoke(_agents);
             info.CancelAction = null;
         }
-        
     }
 }
 
@@ -94,4 +119,5 @@ public struct VerbApply
 {
     public NotifyValue<bool> IsApply;
     public Action<List<Agent>> CancelAction;
+    public string name;
 }

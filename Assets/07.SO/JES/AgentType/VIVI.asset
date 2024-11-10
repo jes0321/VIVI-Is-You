@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VIVI
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
-  _type: 0
+  _type: 1
