@@ -8,6 +8,10 @@ public class Subject : Object, IVerbable
     [SerializeField] private AgentDataSO _agentData;
     
     private Dictionary<Vector2, VerbApply> _isVerbApplyInfoDic = new Dictionary<Vector2, VerbApply>();
+    
+    private List<Agent> _transAgents = new List<Agent>();
+    private AgentDataSO _transData;
+    private bool _isRollback = false;
     protected override void Awake()
     {
         base.Awake();
@@ -16,14 +20,16 @@ public class Subject : Object, IVerbable
         _agentData.ListReset();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEvent += RollBackTrue;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent += RollBackFalse;
     }
 
     private void OnEnable()
     {
         FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
         {
-            if (_agentData._type == agent.AgentType)
+            if (_agentData._type == agent.AgentType._type)
             {
                 if(!_agentData.agents.Contains(agent))
                     _agentData.agents.Add(agent);
@@ -34,7 +40,10 @@ public class Subject : Object, IVerbable
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackTrue;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackFalse;
+
     }
     public List<Agent> GetAgents()
     {
@@ -42,11 +51,23 @@ public class Subject : Object, IVerbable
     }
     public void VerbApply(List<Agent> agents)
     {
+        TransAgent(agents);
+        TransAgentVerbApply(agents);
+        agents.Clear();
+    }
+
+    private void TransAgent(List<Agent> agents)
+    {
         agents.ForEach(agent =>
         {
+            _transAgents.Add(agent);
+
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
         });
+    }
+    private void TransAgentVerbApply(List<Agent> agents)
+    {
         if (_agentData.verbs.Count > 1)
         {
             for (int i = 0; i < _agentData.verbs.Count - 1; i++)
@@ -54,18 +75,45 @@ public class Subject : Object, IVerbable
                 _agentData.verbs[i].VerbApply(agents);
             }
         }
-        else
+        else if(_agentData.verbs.Count == 1)
         {
             _agentData.verbs[0].VerbApply(agents);
         }
-        
-        _agentData.verbs.ForEach(verb => verb.VerbApply(agents));
-        agents = new List<Agent>();
     }
-
+    private void TransAgentVerbCancel(List<Agent> agents)
+    {
+        if (_agentData.verbs.Count > 1)
+        {
+            for (int i = 0; i < _agentData.verbs.Count - 1; i++)
+            {
+                _agentData.verbs[i].VerbCancel(agents);
+            }
+        }
+        else if(_agentData.verbs.Count == 1)
+        {
+            _agentData.verbs[0].VerbCancel(agents);
+        }
+    }
+    
     public void VerbCancel(List<Agent> agents)
     {
-        //여긴 해줄게 없다
+        if (_isRollback)
+        {
+            TransAgentVerbCancel(agents);
+            for (int i = 0; i < _transData.verbs.Count; i++)
+            {
+                _transData.verbs[i].VerbCancel(agents);
+            }
+            _transAgents.ForEach(agent =>
+            {
+                _transData.agents.Add(agent);
+                agent.UpdateData(_transData);
+                _agentData.agents.Remove(agent);
+            });
+            _isRollback = false;
+            _transAgents.Clear();
+            _transData = null;
+        }
     }
     private void DirectObject()
     {
@@ -78,6 +126,14 @@ public class Subject : Object, IVerbable
         }
     }
 
+    private void RollBackTrue()
+    {
+        _isRollback = true;
+    }
+    private void RollBackFalse()
+    {
+        _isRollback = false;
+    }
     private bool ShootRayAndApply(Vector2 dir)
     {
         Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
@@ -91,12 +147,22 @@ public class Subject : Object, IVerbable
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
+            SubjectCheck(verb);
             _agentData.verbs.Add(verb);
             info.Target = verb;
             info.IsApply.Value = true;
             return true;
         }
         return false;
+    }
+
+    private void SubjectCheck(IVerbable verb)
+    {
+        Subject subject = verb as Subject;
+        if (subject != null)
+        {
+            _transData = subject._agentData;
+        }
     }
 
     private void DicSetting()
@@ -123,21 +189,18 @@ public class Subject : Object, IVerbable
             ApplyCancel(info);
         }
     }
-
     private void ApplyCancel(VerbApply info)
     {
         info.Target.VerbCancel(_agentData.agents);
         _agentData.verbs.Remove(info.Target);
         info.Target = null;
     }
-
     private void RightVerbCancel(bool before, bool after)
     {
         if (!after)
         {
             VerbApply info =_isVerbApplyInfoDic[-Vector2.right];
             ApplyCancel(info);
-
         }
     }
 }

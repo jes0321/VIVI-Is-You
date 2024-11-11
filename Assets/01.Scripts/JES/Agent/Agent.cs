@@ -14,7 +14,7 @@ public abstract class Agent : MonoBehaviour, IPushable
 {
     protected StateMachine _stateMachine;
     
-    public AgentType AgentType;
+    public AgentDataSO AgentType;
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
 
@@ -71,7 +71,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     public void UpdateData(AgentDataSO data)
     {
         GetComponent<SpriteRenderer>().sprite = data._sprite;
-        AgentType = data._type;
+        AgentType = data;
     }
     private void Update()
     {
