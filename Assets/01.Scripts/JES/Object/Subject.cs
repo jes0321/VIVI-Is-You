@@ -47,7 +47,19 @@ public class Subject : Object, IVerbable
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
         });
-        _agentData.verbs.ForEach(verb => VerbApply(agents));
+        if (_agentData.verbs.Count > 1)
+        {
+            for (int i = 0; i < _agentData.verbs.Count - 1; i++)
+            {
+                _agentData.verbs[i].VerbApply(agents);
+            }
+        }
+        else
+        {
+            _agentData.verbs[0].VerbApply(agents);
+        }
+        
+        _agentData.verbs.ForEach(verb => verb.VerbApply(agents));
         agents = new List<Agent>();
     }
 
