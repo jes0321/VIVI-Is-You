@@ -4,6 +4,6 @@ public class VIVI : Agent
     {
         base.Awake();
         
-        _stateMachine.Initalize(StateType.You, this);
+        YouStateTrans(true);
     }
 }

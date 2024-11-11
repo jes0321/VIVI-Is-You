@@ -17,12 +17,9 @@ public class StateMachine
         _currStateDic = new Dictionary<StateType, State>();
     }
 
-    public void Initalize(StateType type,Agent agent)
+    public void Initalize(Agent agent)
     {
         this.agent = agent;
-        
-        _stateDic[type].Enter();
-        _currStateDic.Add(type, _stateDic[type]);
     }
     public void AddState(StateType type,State state)
     {

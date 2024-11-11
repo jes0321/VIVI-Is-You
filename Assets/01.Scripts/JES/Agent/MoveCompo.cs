@@ -63,21 +63,11 @@ public class MoveCompo : MonoBehaviour
             { 
                 if (pushable.IsPushable)
                 {
-                    Debug.Log("IPushable 객체 감지됨!");
                     return pushable.MoveObject(Vec);
                 }
-                return false;
-            }
-            else
-            {
-                Debug.Log("IPushable이 아니거나 Pushable 상태 아님.");
+                return true;
             }
         }
-        else
-        { 
-            Debug.Log("레이가 아무 객체와도 충돌하지 않음.");
-        }
-
         return true;
     } 
     #endregion

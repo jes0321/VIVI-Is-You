@@ -9,6 +9,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     private Controls _controls;
     public event Action<Vector2> OnMovementEvent;
     public event Action OnRollbackEvent;
+    public event Action OnRollbackEndEvent;
 
     public event Action OnTurnEndEvent;
     private void OnEnable()
@@ -36,5 +37,6 @@ public class InputReader : ScriptableObject, IPlayerActions
         {
             OnRollbackEvent?.Invoke();
         }
+        if(context.canceled) OnRollbackEndEvent?.Invoke();
     }
 }
