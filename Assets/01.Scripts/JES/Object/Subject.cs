@@ -100,10 +100,12 @@ public class Subject : Object, IVerbable
         if (_isRollback)
         {
             TransAgentVerbCancel(agents);
+            
             _agentData.verbs.ForEach(verb =>
             {
                 verb.VerbCancel(_transAgents);
             });
+            
             _transAgents.ForEach(agent =>
             {
                 Debug.Log(agent.gameObject.name);
@@ -111,6 +113,7 @@ public class Subject : Object, IVerbable
                 agent.UpdateData(_transData);
                 _agentData.agents.Remove(agent);
             });
+            
             _isRollback = false;
             _transAgents.Clear();
             _transData = null;
