@@ -15,30 +15,7 @@ public class BoardManager : MonoBehaviour
     {
         _tileMap = GetComponentInChildren<Tilemap>();
     }
-
-    private void Update()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            List<Agent> agents = new List<Agent>();
-            FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
-            {
-                if(agent.AgentType == AgentType.WALL)
-                    agents.Add(agent);
-            });
-            VerbApply(agents);
-        }
-        if (Keyboard.current.cKey.wasPressedThisFrame)
-        {
-            List<Agent> agents = new List<Agent>();
-            FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
-            {
-                if (agent.AgentType == AgentType.WALL)
-                    agents.Add(agent);
-            });
-            VerbCancel(agents);
-        }
-    }
+    
 
     public void VerbApply(List<Agent> list)
     {
