@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BtnEnable : MonoBehaviour
 {
     private TextMeshProUGUI _text;
     [SerializeField] private GameObject _image;
     private int _btnNum, _currentStage;
+    private string _stage => "Stage" + _btnNum.ToString();
 
     public void Initialized(int btnStage, int currentStage)
     {
@@ -23,6 +25,7 @@ public class BtnEnable : MonoBehaviour
         if (_currentStage >= _btnNum)
         {
             Debug.Log("¿‘¿Â");
+            SceneManager.LoadScene(_stage);
         }
     }
 }
