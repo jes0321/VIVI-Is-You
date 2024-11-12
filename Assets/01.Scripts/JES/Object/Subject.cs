@@ -55,13 +55,13 @@ public class Subject : Object, IVerbable
         TransAgentVerbApply(agents);
         agents.Clear();
     }
-
     private void TransAgent(List<Agent> agents)
     {
         agents.ForEach(agent =>
         {
             _transAgents.Add(agent);
-
+            _transData = agent.AgentType;
+            
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
         });
@@ -100,12 +100,13 @@ public class Subject : Object, IVerbable
         if (_isRollback)
         {
             TransAgentVerbCancel(agents);
-            for (int i = 0; i < _transData.verbs.Count; i++)
+            _agentData.verbs.ForEach(verb =>
             {
-                _transData.verbs[i].VerbCancel(agents);
-            }
+                verb.VerbCancel(_transAgents);
+            });
             _transAgents.ForEach(agent =>
             {
+                Debug.Log(agent.gameObject.name);
                 _transData.agents.Add(agent);
                 agent.UpdateData(_transData);
                 _agentData.agents.Remove(agent);
@@ -147,7 +148,6 @@ public class Subject : Object, IVerbable
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
-            SubjectCheck(verb);
             _agentData.verbs.Add(verb);
             info.Target = verb;
             info.IsApply.Value = true;
@@ -155,16 +155,7 @@ public class Subject : Object, IVerbable
         }
         return false;
     }
-
-    private void SubjectCheck(IVerbable verb)
-    {
-        Subject subject = verb as Subject;
-        if (subject != null)
-        {
-            _transData = subject._agentData;
-        }
-    }
-
+    
     private void DicSetting()
     {
         VerbApply rightApply = new VerbApply();
