@@ -24,7 +24,6 @@ public class Subject : Object, IVerbable
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += RollBackFalse;
     }
-
     private void OnEnable()
     {
         FindObjectsByType<Agent>(FindObjectsSortMode.None).ToList().ForEach(agent =>
