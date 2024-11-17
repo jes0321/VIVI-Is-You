@@ -52,8 +52,19 @@ public class Subject : Object, IVerbable
     {
         TransAgent(agents);
         TransAgentVerbApply(agents);
+        TransAgentVerbCancel(agents);
+        
         agents.Clear();
     }
+
+    private void TransAgentVerbCancel(List<Agent> agents)
+    {
+        _transData.verbs.ForEach(verb =>
+        {
+            verb.VerbCancel(agents);
+        });
+    }
+
     private void TransAgent(List<Agent> agents)
     {
         agents.ForEach(agent =>
@@ -67,32 +78,15 @@ public class Subject : Object, IVerbable
     }
     private void TransAgentVerbApply(List<Agent> agents)
     {
-        for (int i = 0; i < _agentData.verbs.Count; i++)
+        foreach (var t in _agentData.verbs)
         {
-            _agentData.verbs[i].VerbApply(agents);
+            t.VerbApply(agents);
         }
     }
-    private void TransAgentVerbCancel(List<Agent> agents)
-    {
-        if (_agentData.verbs.Count > 1)
-        {
-            for (int i = 0; i < _agentData.verbs.Count - 1; i++)
-            {
-                _agentData.verbs[i].VerbCancel(agents);
-            }
-        }
-        else if(_agentData.verbs.Count == 1)
-        {
-            _agentData.verbs[0].VerbCancel(agents);
-        }
-    }
-    
     public void VerbCancel(List<Agent> agents)
     {
         if (_isRollback)
         {
-            TransAgentVerbCancel(agents);
-            
             _agentData.verbs.ForEach(verb =>
             {
                 verb.VerbCancel(_transAgents);
@@ -100,10 +94,15 @@ public class Subject : Object, IVerbable
             
             _transAgents.ForEach(agent =>
             {
-                Debug.Log(agent.gameObject.name);
                 _transData.agents.Add(agent);
                 agent.UpdateData(_transData);
                 _agentData.agents.Remove(agent);
+            });
+            
+            _transData.verbs.Remove(this);
+            _transData.verbs.ForEach(verb =>
+            {
+                verb.VerbApply(_transAgents);
             });
             
             _isRollback = false;
