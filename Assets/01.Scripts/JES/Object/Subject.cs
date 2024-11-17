@@ -52,7 +52,6 @@ public class Subject : Object, IVerbable
     {
         TransAgent(agents);
         TransAgentVerbApply(agents);
-        
         TransAgentVerbCancel(agents);
         
         agents.Clear();
