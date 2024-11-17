@@ -52,8 +52,20 @@ public class Subject : Object, IVerbable
     {
         TransAgent(agents);
         TransAgentVerbApply(agents);
+        
+        TransAgentVerbCancel(agents);
+        
         agents.Clear();
     }
+
+    private void TransAgentVerbCancel(List<Agent> agents)
+    {
+        _transData.verbs.ForEach(verb =>
+        {
+            verb.VerbCancel(agents);
+        });
+    }
+
     private void TransAgent(List<Agent> agents)
     {
         agents.ForEach(agent =>
@@ -83,10 +95,15 @@ public class Subject : Object, IVerbable
             
             _transAgents.ForEach(agent =>
             {
-                Debug.Log(agent.gameObject.name);
                 _transData.agents.Add(agent);
                 agent.UpdateData(_transData);
                 _agentData.agents.Remove(agent);
+            });
+            
+            _transData.verbs.Remove(this);
+            _transData.verbs.ForEach(verb =>
+            {
+                verb.VerbApply(_transAgents);
             });
             
             _isRollback = false;
