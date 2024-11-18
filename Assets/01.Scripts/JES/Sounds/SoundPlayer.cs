@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
+
 using DG.Tweening;
-using GGMPool;
 using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
@@ -46,7 +42,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
         if (!data.loop)
         {
             float time = _audioSource.clip.length + 0.2f;
-            //DOVirtual.DelayedCall(time, () => PoolManager.Instance.Push(this));
+            DOVirtual.DelayedCall(time, () => PoolManager.Instance.Push(this));
         }
         _audioSource.Play();
     }
@@ -54,16 +50,12 @@ public class SoundPlayer : MonoBehaviour, IPoolable
     public void StopAndGoToPool()
     {
         _audioSource.Stop();
-        //PoolManager.Instance.Push(this);
+        PoolManager.Instance.Push(this);
     }
 
-    public PoolTypeSO PoolType { get; }
-    public GameObject GameObject { get; }
-
-    public void SetUpPool(Pool pool)
-    {
-        //d
-    }
+    public string PoolName => poolName;
+    public string poolName = "SoundPlayer";
+    public GameObject ObjectPrefab => gameObject;
 
     public void ResetItem()
     {
