@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using GGMPool;
 using UnityEngine;
 
 public class EffectPlayer : MonoBehaviour, IPoolable
@@ -29,16 +28,12 @@ public class EffectPlayer : MonoBehaviour, IPoolable
     private IEnumerator DelayAndGotoPoolCoroutine()
     {
         yield return _particleDuration;
-        //PoolManager.Instance.Push(this);
+        PoolManager.Instance.Push(this);
     }
 
-    public PoolTypeSO PoolType { get; }
-    public GameObject GameObject { get; }
-
-    public void SetUpPool(Pool pool)
-    {
-        //
-    }
+    public string PoolName => poolName;
+    public string poolName = "EffectPlayer";
+    public GameObject ObjectPrefab => gameObject;
 
     public void ResetItem()
     {
