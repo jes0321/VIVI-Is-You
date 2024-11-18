@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02cd45e3a22519b47ab0c2845e2bb542, type: 3}
-  m_Name: StageData
+  m_Script: {fileID: 11500000, guid: 22ea6c7db6fd6aa4f8a1801dc56c20da, type: 3}
+  m_Name: Unlock1
   m_EditorClassIdentifier: 
-  currentStage: 10
-  isFirst: 1
+  poolName: Unlock1
+  prefab: {fileID: 6738657421867733063, guid: d60c5904754116f46aa4c0f97cbeb34f, type: 3}
+  count: 1

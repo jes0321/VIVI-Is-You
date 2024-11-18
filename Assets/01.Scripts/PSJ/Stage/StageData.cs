@@ -4,4 +4,5 @@ using UnityEngine;
 public class StageData : ScriptableObject
 {
     public int currentStage;
+    public bool isFirst;
 }

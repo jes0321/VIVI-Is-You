@@ -12,8 +12,9 @@ public class StageManager : MonoBehaviour
         int btnNum = 1;
         GetComponentsInChildren<BtnEnable>().ToList().ForEach(btn =>
         {
-            btn.Initialized(btnNum,stageData.currentStage);
+            btn.Initialized(btnNum,stageData.currentStage,stageData.isFirst);
             btnNum++;
         });
+        stageData.isFirst = false;
     }
 }
