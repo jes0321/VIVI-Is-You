@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,5 +28,15 @@ public class BtnEnable : MonoBehaviour
             Debug.Log("¿‘¿Â");
             SceneManager.LoadScene(_stage);
         }
+    }
+
+    private IEnumerator UnlockStage()
+    {
+        yield return new WaitForSeconds(1f);
+        //_particle.Play();
+        yield return new WaitForSeconds(0.1f);
+        //_particle.Play();
+        yield return new WaitForSeconds(0.1f);
+        //_particle.Play();
     }
 }

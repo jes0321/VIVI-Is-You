@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ff0b9bffb1b0f844a44020b0677d445
+guid: 295e043a87a85ac41ade66b45403b10c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cafe24 Decoschool
+  - Shine Bubble Deco
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
