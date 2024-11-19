@@ -32,8 +32,9 @@ public abstract class Verb : Object
 
     public IVerbable ShootRayAndCancel(Vector2 direction)
     {
-        Vector3 padding = new Vector3(direction.x * 0.7f, direction.y * 0.7f, 0);
-        RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, direction, 0.5f);
+        Vector3 padding = new Vector3(direction.x * 0.5f, direction.y * 0.5f, 0);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, direction, 0.3f);
+        
         if (ray.collider != null && ray.collider.TryGetComponent(out IVerbable verbable))
         {
             return verbable;
@@ -43,8 +44,8 @@ public abstract class Verb : Object
     
     private void ShootRayAndApply(Vector2 dir)          
     {
-        Vector3 padding = new Vector3(dir.x * 0.7f, dir.y * 0.7f, 0);
-        RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, dir, 0.5f);
+        Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, dir, 0.3f);    
         if (ray.collider != null&&ray.collider.TryGetComponent(out Subject subject))
         {
             RaycastHit2D otherRay = Physics2D.Raycast(transform.position+-padding, -dir, 0.5f);
