@@ -12,8 +12,6 @@ public enum AgentType
 }
 public abstract class Agent : MonoBehaviour, IPushable
 {
-    protected StateMachine _stateMachine;
-    
     public AgentDataSO AgentType;
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
@@ -22,9 +20,6 @@ public abstract class Agent : MonoBehaviour, IPushable
     
     protected virtual void Awake()
     {
-        _stateMachine = new StateMachine();
-
-        _stateMachine.AddState(StateType.You, new YouState(this, _stateMachine));
         
         moveCompo = GetComponent<MoveCompo>();
         
@@ -32,9 +27,19 @@ public abstract class Agent : MonoBehaviour, IPushable
             .ForEach(component=>_compoDic.Add(component.GetType(), component));
         InitComponents();
         
-        _stateMachine.Initalize(this);
+        inputReader.OnMovementEvent += HandleOnMovement;
     }
 
+    private void OnDestroy()
+    {
+        inputReader.OnMovementEvent -= HandleOnMovement;
+    }
+    private void HandleOnMovement(Vector2 obj)
+    {
+        if(!_isYouState) return;
+        RollBackManager.Instance.ListReset();
+        moveCompo.MoveAgent(obj);
+    }
     #region compoSet
 
     private Dictionary<Type, IAgentCompo> _compoDic = new Dictionary<Type, IAgentCompo>();
@@ -73,20 +78,8 @@ public abstract class Agent : MonoBehaviour, IPushable
         GetComponent<SpriteRenderer>().sprite = data._sprite;
         AgentType = data;
     }
-    private void Update()
-    {
-        _stateMachine.UpdateCurState();
-    }
     public void YouStateTrans(bool value)
     {
-        if (value)
-        {
-            _stateMachine.AddCurState(StateType.You);
-        }
-        else
-        {
-            _stateMachine.ExitCurState(StateType.You);
-        }
         _isYouState = value;
     }
 }

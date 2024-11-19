@@ -10,19 +10,13 @@ public class YouState : State
 
     public override void Enter()
     {
-        _agent.inputReader.OnMovementEvent += HandleOnMovement;
     }
 
-    private void HandleOnMovement(Vector2 obj)
-    {
-        RollBackManager.Instance.ListReset();
-        _agent.moveCompo.MoveAgent(obj);
-    }
+    
 
    
 
     public override void Exit()
     {
-        _agent.inputReader.OnMovementEvent -= HandleOnMovement;
     }
 }
