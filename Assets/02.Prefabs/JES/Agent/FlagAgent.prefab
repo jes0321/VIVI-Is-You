@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8975281948867450588, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: -8975281948867450588, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.82
+      objectReference: {fileID: 0}
     - target: {fileID: 383744922774239917, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: AgentType
       value: 
@@ -55,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 5314177354330779120, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bdce2bb6e7f39fb4698cdce598e15ce1, type: 3}
+      objectReference: {fileID: 7914007777249398137, guid: f777c6d2a68c4114b834e381155051c3, type: 3}
     - target: {fileID: 8504398194988413913, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Name
       value: FlagAgent
