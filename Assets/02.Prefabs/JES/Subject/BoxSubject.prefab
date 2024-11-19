@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7110871191586027203
+--- !u!1001 &1462986921214606321
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4603101258649548587, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603101258649548587, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.96
+      objectReference: {fileID: 0}
     - target: {fileID: 4972999668160064461, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -26,15 +34,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4972999668160064461, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4972999668160064461, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4972999668160064461, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4972999668160064461, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -50,12 +58,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059027612016657943, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: m_Name
-      value: Subject Variant
+      value: BoxSubject
       objectReference: {fileID: 0}
     - target: {fileID: 8184444712997766047, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
       propertyPath: _agentData
       value: 
-      objectReference: {fileID: 11400000, guid: 751b57d5b31af0b499d04d77c69f6f0e, type: 2}
+      objectReference: {fileID: 11400000, guid: 13180b500f3bd69408688e80540fb7c5, type: 2}
+    - target: {fileID: 8418262231910551958, guid: db6cc1134d217a94a9b8d15b4b42aec1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3712664065799481960, guid: 527ad33f32c199f4b8d1ca5b513a91ba, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
