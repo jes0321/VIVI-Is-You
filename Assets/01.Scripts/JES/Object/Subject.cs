@@ -132,7 +132,7 @@ public class Subject : Object, IVerbable
                         return;
                     }
                 }
-                data.Value.IsApply.Value = false;
+                data.Value.IsApply.Value = false;           
             }
         }
     }
