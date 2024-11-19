@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a05e27a71f8ed408a1405f0cbf1dfc, type: 3}
   m_Name: Box
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 56a16c69f99910b439aa9210621acc5b, type: 3}
+  _sprite: {fileID: 21300000, guid: ea444f6024e50f84ab81f26d1aa08307, type: 3}
   _type: 2
   agents:
   - {fileID: 0}
