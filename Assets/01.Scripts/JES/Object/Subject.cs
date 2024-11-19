@@ -116,7 +116,23 @@ public class Subject : Object, IVerbable
         {
             if (data.Value.IsApply.Value)
             {
-                data.Value.IsApply.Value = ShootRayAndApply(-data.Key);
+                Verb verb = ShootRayAndApply(-data.Key);
+                if (verb != null)
+                {
+                    IVerbable verbable = verb.ShootRayAndCancel(-data.Key);
+                    if (verbable==data.Value.Target)
+                    {
+                        return;
+                    }
+                    
+                    if (verbable != null)
+                    {
+                        data.Value.IsApply.Value = false;
+                        IsApply(data.Key, verbable);
+                        return;
+                    }
+                }
+                data.Value.IsApply.Value = false;
             }
         }
     }
@@ -129,16 +145,16 @@ public class Subject : Object, IVerbable
     {
         _isRollback = false;
     }
-    private bool ShootRayAndApply(Vector2 dir)
+    private Verb ShootRayAndApply(Vector2 dir)
     {
         Vector3 padding = new Vector3(dir.x * 0.7f, dir.y * 0.7f, 0);
         RaycastHit2D ray = Physics2D.Raycast(transform.position + padding, dir, 0.5f);
 
         if (ray.collider != null && ray.collider.TryGetComponent(out Verb verb))
         {
-            return verb.ShootRayAndCancel(dir);
+            return verb;
         }
-        return false;
+        return null;
     }
 
     public bool IsApply(Vector2 direction, IVerbable verb)
