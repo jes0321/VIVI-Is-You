@@ -3252,7 +3252,7 @@ PrefabInstance:
     - target: {fileID: 2471221827986978838, guid: 1953579daeed5ef4c9ec8c18e9486a3a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c6a3b27b70e5a784aa5756834691900b, type: 3}
+      objectReference: {fileID: 21300000, guid: bdce2bb6e7f39fb4698cdce598e15ce1, type: 3}
     - target: {fileID: 2490781237174367230, guid: 1953579daeed5ef4c9ec8c18e9486a3a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5
@@ -4823,6 +4823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlagSubject
       objectReference: {fileID: 0}
+    - target: {fileID: 5997391160014504604, guid: 2fbd634de836d774ba2eae2eac2106e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2303573839472899717, guid: 527ad33f32c199f4b8d1ca5b513a91ba, type: 3}
     - target: {fileID: 7127803205831293127, guid: 2fbd634de836d774ba2eae2eac2106e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.47
