@@ -23,6 +23,7 @@ public class Subject : Object, IVerbable
         RollBackManager.Instance._inputReader.OnTurnEndEvent += RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEvent += RollBackTrue;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
+        RollBackManager.Instance.OnDestroyEvent += Destroy;
     }
     private void OnEnable()
     {
@@ -36,8 +37,9 @@ public class Subject : Object, IVerbable
         });
     }
 
-    private void OnDestroy()
+    private void Destroy()
     {
+        RollBackManager.Instance.OnDestroyEvent -= Destroy;
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEvent -= RollBackTrue;

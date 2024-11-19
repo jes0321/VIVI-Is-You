@@ -9,6 +9,7 @@ public abstract class Verb : Object
     protected override void Awake()
     {
         base.Awake();
+        RollBackManager.Instance.OnDestroyEvent += Destroy;
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
@@ -18,8 +19,9 @@ public abstract class Verb : Object
         DirectObject();
     }
 
-    private void OnDestroy()
+    private void Destroy()
     {
+        RollBackManager.Instance.OnDestroyEvent -= Destroy;
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
     }

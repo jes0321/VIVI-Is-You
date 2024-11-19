@@ -10,6 +10,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     public InputReader _inputReader;//인풋리더
     
     private Stack<List<RollBackData>> _rollBackStack = new Stack<List<RollBackData>>();
+    public Action OnDestroyEvent;
     private List<RollBackData> _dummyList = new List<RollBackData>();
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
 
     private void OnDestroy()
     {
+        OnDestroyEvent?.Invoke();
         _inputReader.OnRollbackEvent -= HandleRollback;
     }
 
