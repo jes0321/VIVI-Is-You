@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd45e3a22519b47ab0c2845e2bb542, type: 3}
   m_Name: StageData
   m_EditorClassIdentifier: 
-  currentStage: 10
-  isFirst: 1
+  currentStage: 2
+  isFirst: 0

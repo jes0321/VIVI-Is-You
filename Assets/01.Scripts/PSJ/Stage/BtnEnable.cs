@@ -10,7 +10,7 @@ public class BtnEnable : MonoBehaviour
     private int _btnNum, _currentStage;
     private bool IsTimeEnd = false;
     private string _effectName = "Unlock";
-    private string _stage => "Stage" + _btnNum.ToString();
+    private string _stage => _btnNum.ToString();
 
     private WaitForSeconds _sleep;
 

@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinCollider : MonoBehaviour, IAgentCompo
 {
     private BoxCollider2D _collider;
+    [SerializeField] private StageData _stageData;
+    private string _stageName => SceneManager.GetActiveScene().name;
     
     public void Initialize(Agent agent)
     {
@@ -17,7 +20,12 @@ public class WinCollider : MonoBehaviour, IAgentCompo
     {
         if (other.GetComponent<Agent>()._isYouState)
         {
-            Debug.Log("니 성공해따 다음 스테이지 가라~");
+            if(int.Parse(_stageName) == _stageData.currentStage)
+            {
+                _stageData.currentStage++;
+                _stageData.isFirst = true;
+            }
+            SceneManager.LoadScene(SceneName.LobbyScene);
         }
     }
 }
