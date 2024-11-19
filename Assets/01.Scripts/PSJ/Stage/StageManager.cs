@@ -18,3 +18,8 @@ public class StageManager : MonoBehaviour
         stageData.isFirst = false;
     }
 }
+
+public class SceneName
+{
+    public const string LobbyScene = "LobbyScene";
+}
