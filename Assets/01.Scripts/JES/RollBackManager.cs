@@ -17,7 +17,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         _inputReader.OnRollbackEvent += HandleRollback;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         OnDestroyEvent?.Invoke();
         _inputReader.OnRollbackEvent -= HandleRollback;
