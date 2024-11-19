@@ -41,11 +41,14 @@ public abstract class Verb : Object
     {
         Vector3 padding = new Vector3(dir.x * 0.7f, dir.y * 0.7f, 0);
         RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, dir, 1);
+        Debug.Log(2);
         if (ray.collider != null&&ray.collider.TryGetComponent(out Subject subject))
         {
+            Debug.Log(3);   
             RaycastHit2D otherRay = Physics2D.Raycast(transform.position+-padding, -dir, 1);
             if (otherRay.collider != null&&otherRay.collider.TryGetComponent(out IVerbable verbable))
             {
+                Debug.Log(1);
                 if(subject.IsApply(dir,verbable))
                     ApplyVerb(subject, verbable);
             }
