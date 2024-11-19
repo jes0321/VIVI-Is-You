@@ -33,7 +33,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     }
     public void OnRollback(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
             OnRollbackEvent?.Invoke();
         }

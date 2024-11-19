@@ -20,9 +20,9 @@ public class Subject : Object, IVerbable
         _agentData.ListReset();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnTurnEndEvent += RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEvent += RollBackTrue;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent += RollBackFalse;
     }
     private void OnEnable()
     {
@@ -39,9 +39,9 @@ public class Subject : Object, IVerbable
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnTurnEndEvent -= RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackTrue;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackFalse;
 
     }
     public List<Agent> GetAgents()
