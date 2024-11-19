@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 383744922774239917, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
+      propertyPath: AgentType
+      value: 
+      objectReference: {fileID: 11400000, guid: 895c15c9bc54940459f2694a78100f39, type: 2}
     - target: {fileID: 5288707398002353688, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504398194988413913, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Name
-      value: Agent
+      value: FlagAgent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
