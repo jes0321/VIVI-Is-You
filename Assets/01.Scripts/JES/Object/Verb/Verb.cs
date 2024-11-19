@@ -41,13 +41,6 @@ public abstract class Verb : Object
         }
         return null;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color= Color.red;
-        Gizmos.DrawRay(transform.position + (Vector3)Vector2.right*0.5f, Vector2.right);
-        Gizmos.color= Color.white;
-    }
-
     
     private void ShootRayAndApply(Vector2 dir)          
     {
