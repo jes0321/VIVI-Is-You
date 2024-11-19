@@ -20,9 +20,9 @@ public class Subject : Object, IVerbable
         _agentData.ListReset();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
-        RollBackManager.Instance._inputReader.OnTurnEndEvent += RollBackFalse;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent += RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEvent += RollBackTrue;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackPerformEvent += DirectObject;
     }
     private void OnEnable()
     {
@@ -39,9 +39,9 @@ public class Subject : Object, IVerbable
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
-        RollBackManager.Instance._inputReader.OnTurnEndEvent -= RollBackFalse;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackTrue;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackPerformEvent -= DirectObject;
 
     }
     public List<Agent> GetAgents()
@@ -67,10 +67,11 @@ public class Subject : Object, IVerbable
 
     private void TransAgent(List<Agent> agents)
     {
+        if(agents.Count == 0) return;
+        _transData = agents[0].AgentType;
         agents.ForEach(agent =>
         {
             _transAgents.Add(agent);
-            _transData = agent.AgentType;
             
             agent.UpdateData(_agentData);
             _agentData.agents.Add(agent);
@@ -129,6 +130,7 @@ public class Subject : Object, IVerbable
                     {
                         data.Value.IsApply.Value = false;
                         IsApply(data.Key, verbable);
+                        verb.ApplyVerb(this, verbable);
                         return;
                     }
                 }
@@ -157,13 +159,15 @@ public class Subject : Object, IVerbable
         return null;
     }
 
-    public bool IsApply(Vector2 direction, IVerbable verb)
+    public bool IsApply(Vector2 direction, IVerbable verbAble)
     {
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
-            _agentData.verbs.Add(verb);
-            info.Target = verb;
+            Debug.Log(verbAble);
+            Debug.Log(_agentData.agents.Count);
+            _agentData.verbs.Add(verbAble);
+            info.Target = verbAble;
             info.IsApply.Value = true;
             return true;
         }

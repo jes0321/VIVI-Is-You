@@ -59,5 +59,5 @@ public abstract class Verb : Object
     /// agent 받아와서 동사 적용시켜주는 함수
     /// </summary>
     /// <param name="agents"></param>
-    protected abstract void ApplyVerb(Subject subject, IVerbable verbable);
+    public abstract void ApplyVerb(Subject subject, IVerbable verbable);
 }
