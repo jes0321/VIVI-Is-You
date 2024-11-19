@@ -131,10 +131,14 @@ public class Subject : Object, IVerbable
     }
     private bool ShootRayAndApply(Vector2 dir)
     {
-        Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
+        Vector3 padding = new Vector3(dir.x * 0.7f, dir.y * 0.7f, 0);
         RaycastHit2D ray = Physics2D.Raycast(transform.position + padding, dir, 1);
-        
-        return ray.collider != null && ray.collider.TryGetComponent(out Verb verb);
+
+        if (ray.collider != null && ray.collider.TryGetComponent(out Verb verb))
+        {
+            return verb.ShootRayAndCancel(dir);
+        }
+        return false;
     }
 
     public bool IsApply(Vector2 direction, IVerbable verb)
