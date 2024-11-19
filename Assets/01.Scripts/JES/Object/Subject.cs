@@ -20,9 +20,9 @@ public class Subject : Object, IVerbable
         _agentData.ListReset();
         
         RollBackManager.Instance._inputReader.OnTurnEndEvent += DirectObject;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent += RollBackFalse;
+        RollBackManager.Instance._inputReader.OnTurnEndEvent += RollBackFalse;
         RollBackManager.Instance._inputReader.OnRollbackEvent += RollBackTrue;
-        RollBackManager.Instance._inputReader.OnRollbackPerformEvent += DirectObject;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent += DirectObject;
     }
     private void OnEnable()
     {
@@ -39,10 +39,9 @@ public class Subject : Object, IVerbable
     private void OnDestroy()
     {
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackFalse;
-        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= RollBackTrue;
-        RollBackManager.Instance._inputReader.OnRollbackPerformEvent -= DirectObject;
-
+        RollBackManager.Instance._inputReader.OnTurnEndEvent -= RollBackFalse;
+        RollBackManager.Instance._inputReader.OnRollbackEvent -= RollBackTrue;
+        RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;
     }
     public List<Agent> GetAgents()
     {
@@ -120,17 +119,17 @@ public class Subject : Object, IVerbable
                 Verb verb = ShootRayAndApply(-data.Key);
                 if (verb != null)
                 {
-                    IVerbable verbable = verb.ShootRayAndCancel(-data.Key);
-                    if (verbable==data.Value.Target)
+                    IVerbable verbAble = verb.ShootRayAndCancel(-data.Key);
+                    if (verbAble==data.Value.Target)
                     {
                         return;
                     }
                     
-                    if (verbable != null)
+                    if (verbAble != null)
                     {
                         data.Value.IsApply.Value = false;
-                        IsApply(data.Key, verbable);
-                        verb.ApplyVerb(this, verbable);
+                        IsApply(data.Key, verbAble);
+                        verb.ApplyVerb(this, verbAble);
                         return;
                     }
                 }
@@ -149,8 +148,8 @@ public class Subject : Object, IVerbable
     }
     private Verb ShootRayAndApply(Vector2 dir)
     {
-        Vector3 padding = new Vector3(dir.x * 0.7f, dir.y * 0.7f, 0);
-        RaycastHit2D ray = Physics2D.Raycast(transform.position + padding, dir, 0.5f);
+        Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position + padding, dir, 0.4f);
 
         if (ray.collider != null && ray.collider.TryGetComponent(out Verb verb))
         {
@@ -164,8 +163,6 @@ public class Subject : Object, IVerbable
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {
-            Debug.Log(verbAble);
-            Debug.Log(_agentData.agents.Count);
             _agentData.verbs.Add(verbAble);
             info.Target = verbAble;
             info.IsApply.Value = true;
