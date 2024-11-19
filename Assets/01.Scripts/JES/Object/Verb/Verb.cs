@@ -49,7 +49,7 @@ public abstract class Verb : Object
     }
 
     
-    private void ShootRayAndApply(Vector2 dir)
+    private void ShootRayAndApply(Vector2 dir)          
     {
         Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
         RaycastHit2D ray = Physics2D.Raycast(transform.position+padding, dir, 0.3f);    
