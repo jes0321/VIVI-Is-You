@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EffectPlayer : MonoBehaviour, IPoolable
@@ -10,6 +11,8 @@ public class EffectPlayer : MonoBehaviour, IPoolable
     private float _duration;
     private WaitForSeconds _particleDuration;
 
+    [SerializeField] private bool _isRoop=false;
+    
 
     private void Awake()
     {
@@ -22,7 +25,8 @@ public class EffectPlayer : MonoBehaviour, IPoolable
     {
         transform.position = position;
         _particle.Play();
-        StartCoroutine(DelayAndGotoPoolCoroutine());
+        if(!_isRoop)
+            StartCoroutine(DelayAndGotoPoolCoroutine());
     }
 
     private IEnumerator DelayAndGotoPoolCoroutine()
