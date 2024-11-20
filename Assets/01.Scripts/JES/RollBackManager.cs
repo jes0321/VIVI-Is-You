@@ -56,6 +56,18 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         _dummyList.Add(rollbackData);
     }
 
+    public RollBackData GetRollbackData(MoveCompo moveCompo)
+    {
+        foreach (var data in _dummyList)
+        {
+            if (data.moveCompo == moveCompo)
+            {
+                return data;
+            }
+        }
+        return null;
+    } 
+
     public void ListReset()
     {
         if(_dummyList.Count == 0) return;
@@ -66,7 +78,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     }
 
 }
-public struct RollBackData
+public class RollBackData
 {
     public Vector2 moveDir;
     public MoveCompo moveCompo;
