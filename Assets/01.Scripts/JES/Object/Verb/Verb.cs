@@ -20,7 +20,7 @@ public abstract class Verb : Object
     }
 
     private void Destroy()
-    {
+    {   
         RollBackManager.Instance.OnDestroyEvent -= Destroy;
         RollBackManager.Instance._inputReader.OnTurnEndEvent -= DirectObject;
         RollBackManager.Instance._inputReader.OnRollbackEndEvent -= DirectObject;

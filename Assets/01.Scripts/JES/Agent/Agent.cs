@@ -16,21 +16,24 @@ public abstract class Agent : MonoBehaviour, IPushable
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
 
-    public bool _isYouState = false;
+    public bool _isYouState = false,_isMelt=false;
     
+    private SpriteRenderer spriteRenderer;
     protected virtual void Awake()
     {
         
         moveCompo = GetComponent<MoveCompo>();
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
         GetComponentsInChildren<IAgentCompo>(true).ToList()
             .ForEach(component=>_compoDic.Add(component.GetType(), component));
         InitComponents();
         
+    }
+    private void OnEnable()
+    {
         inputReader.OnMovementEvent += HandleOnMovement;
     }
-
-    private void OnDestroy()
+    private void OnDisable()
     {
         inputReader.OnMovementEvent -= HandleOnMovement;
     }
@@ -80,6 +83,8 @@ public abstract class Agent : MonoBehaviour, IPushable
     }
     public void YouStateTrans(bool value)
     {
+        spriteRenderer.sortingLayerName = value ? "Player" : "Object";
+
         _isYouState = value;
     }
 }
