@@ -87,7 +87,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     #endregion
     public void UpdateData(AgentDataSO data)
     {
-        GetComponent<SpriteRenderer>().sprite = data._sprite;
+        spriteRenderer.sprite = data._sprite;
         AgentType = data;
     }
     public void YouStateTrans(bool value)
