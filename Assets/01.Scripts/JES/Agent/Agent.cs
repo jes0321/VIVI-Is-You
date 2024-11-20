@@ -50,7 +50,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     {
         _isOff = value;
         spriteRenderer.enabled = !value;
-    }
+    } 
     #region compoSet
 
     private Dictionary<Type, IAgentCompo> _compoDic = new Dictionary<Type, IAgentCompo>();
