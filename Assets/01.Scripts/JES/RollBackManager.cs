@@ -33,7 +33,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         {
             if (data.offObj!=null)
             {
-                data.offObj.AgentOnOff(false);
+                data.offObj.AgentOff(false);
             } 
         }
         foreach (var data in dataList)
