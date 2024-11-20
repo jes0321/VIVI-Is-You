@@ -35,6 +35,10 @@ public class EffectPlayer : MonoBehaviour, IPoolable
         PoolManager.Instance.Push(this);
     }
 
+    public void StopEffect()
+    {        
+        PoolManager.Instance.Push(this);
+    }
     public string PoolName => poolName;
     public string poolName = "EffectPlayer";
     public GameObject ObjectPrefab => gameObject;
