@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4cdd124d16d05f247b9e00a96829a5ff, type: 3}
+    - target: {fileID: 5314177354330779120, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314177354330779120, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 350652121
+      objectReference: {fileID: 0}
     - target: {fileID: 8504398194988413913, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Name
       value: VIVIAgent
