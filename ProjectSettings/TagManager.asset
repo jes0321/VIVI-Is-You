@@ -50,5 +50,11 @@ TagManager:
   - name: Object
     uniqueID: 1958875639
     locked: 0
+  - name: Player
+    uniqueID: 350652121
+    locked: 0
+  - name: VFX
+    uniqueID: 3539295425
+    locked: 0
   m_RenderingLayers:
   - Default
