@@ -23,28 +23,28 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     public void ToggleWinCollider(bool value)
     {
         _isWin = value;
-        if (IsFalseAndTrue())
+        if (IsFalseAndTrue()&&!value)
             return;
         _collider.enabled = value;
     }
     public void ToggleSinkCollider(bool value)
     {
         _isSink= value;
-        if (IsFalseAndTrue())
+        if (IsFalseAndTrue()&&!value)
             return;
         _collider.enabled = value;
     }
     public void ToggleHotCollider(bool value)
     {
         _isHot = value;
-        if (IsFalseAndTrue())
+        if (IsFalseAndTrue()&&!value)
             return;
         _collider.enabled = value;
     }
     public void ToggleDefeatCollider(bool value)
     {
         _isDefeat = value;
-        if (IsFalseAndTrue())
+        if (IsFalseAndTrue()&&!value)
             return;
         _collider.enabled = value;
     }
