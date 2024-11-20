@@ -58,13 +58,18 @@ public class RollBackManager : MonoSingleton<RollBackManager>
 
     public RollBackData GetRollbackData(MoveCompo moveCompo)
     {
-        foreach (var data in _dummyList)
+        List<RollBackData> dataList = new List<RollBackData>();
+        dataList = _rollBackStack.Pop();
+        foreach (var data in dataList)
         {
             if (data.moveCompo == moveCompo)
             {
+                _rollBackStack.Push(dataList);
                 return data;
             }
         }
+        
+        _rollBackStack.Push(dataList);
         return null;
     } 
 
