@@ -40,17 +40,16 @@ public abstract class Agent : MonoBehaviour, IPushable
     }
     private void HandleOnMovement(Vector2 obj)
     {
-        if(!_isYouState||_isOff) return;
-        if (MoveObject(obj))
-        {
-            RollBackManager.Instance.ListReset();
-        }
+        if(!_isYouState) return;
+        RollBackManager.Instance.ListReset();
+        if(_isOff) return;
+        MoveObject(obj);
     }
 
-    public void AgentOnOff(bool value)
+    public void AgentOff(bool value)
     {
         _isOff = value;
-        spriteRenderer.enabled = value;
+        spriteRenderer.enabled = !value;
     }
     #region compoSet
 
