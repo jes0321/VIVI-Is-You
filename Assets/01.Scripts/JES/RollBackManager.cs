@@ -33,7 +33,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         {
             if (data.offObj!=null)
             {
-                data.offObj.SetActive(true);
+                data.offObj.AgentOnOff(false);
             } 
         }
         foreach (var data in dataList)
@@ -48,7 +48,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         _lastTime = Time.time;
     }
 
-    public void AddRollback(MoveCompo moveCompo, Vector2 dir, GameObject go=null)
+    public void AddRollback(MoveCompo moveCompo, Vector2 dir, Agent go=null)
     {
         RollBackData rollbackData =  new RollBackData() { moveCompo = moveCompo, moveDir = dir,offObj = go};
         
@@ -69,5 +69,5 @@ public struct RollBackData
 {
     public Vector2 moveDir;
     public MoveCompo moveCompo;
-    public GameObject offObj;
+    public Agent offObj;
 }
