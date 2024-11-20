@@ -26,6 +26,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     private void HandleRollback()
     {
         if(_rollBackStack.Count == 0||_lastTime+_limitTime>Time.time) return;
+        ListReset();
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         
