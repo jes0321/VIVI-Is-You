@@ -16,10 +16,9 @@ public abstract class Agent : MonoBehaviour, IPushable
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
 
-    public bool _isYouState = false,_isMelt=false,_isOff=false;
+    public bool _isYouState = false,_isMelt=false;
     
     private SpriteRenderer spriteRenderer;
-    
     protected virtual void Awake()
     {
         
@@ -40,16 +39,9 @@ public abstract class Agent : MonoBehaviour, IPushable
     }
     private void HandleOnMovement(Vector2 obj)
     {
+        RollBackManager.Instance.ListReset();   
         if(!_isYouState) return;
-        RollBackManager.Instance.ListReset();
-        if(_isOff) return;
-        MoveObject(obj);
-    }
-
-    public void AgentOff(bool value)
-    {
-        _isOff = value;
-        spriteRenderer.enabled = !value;
+        moveCompo.MoveAgent(obj);
     }
     #region compoSet
 
@@ -86,7 +78,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     #endregion
     public void UpdateData(AgentDataSO data)
     {
-        spriteRenderer.sprite = data._sprite;
+        GetComponent<SpriteRenderer>().sprite = data._sprite;
         AgentType = data;
     }
     public void YouStateTrans(bool value)
