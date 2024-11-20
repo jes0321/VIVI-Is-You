@@ -71,8 +71,8 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private static void AgentOffEvent(Agent agent)
     {
-        RollBackManager.Instance.AddRollback(agent.moveCompo,Vector2.zero,agent.gameObject);
-        agent.gameObject.SetActive(false);
+        RollBackManager.Instance.AddRollback(agent.moveCompo,Vector2.zero,agent);
+        agent.AgentOnOff(true);
     }
 
     private void WinAction()
