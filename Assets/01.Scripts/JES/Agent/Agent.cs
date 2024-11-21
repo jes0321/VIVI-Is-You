@@ -20,6 +20,8 @@ public abstract class Agent : MonoBehaviour, IPushable
     
     private SpriteRenderer _spriteRenderer;
     public Collider2D Collider { get; protected set; }
+
+    public EffectPlayer effectPlayer;
     
     protected virtual void Awake()
     {
