@@ -58,24 +58,16 @@ public class MoveCompo : MonoBehaviour
         bool value = true;
         foreach (var hit in col)
         {
-            // 레이가 충돌한 경우 IPushable 인터페이스가 있는지 확인
-            if (hit.collider != null)
+            if (hit.collider.TryGetComponent(out IPushable pushable))
             {
-                if (hit.collider.TryGetComponent(out IPushable pushable))
-                { 
-                    if (pushable.IsPushable)
-                    {
-                        if (!pushable.MoveObject(Vec))
-                        {
-                            value = false;
-                        }
-                    }
+                if (pushable.IsPushable)
+                {
+                    if (!pushable.MoveObject(Vec))
+                        value = false;
                 }
             }
-            return value;
         }
-        
-        return true;
+        return value;
     } 
     #endregion
     
