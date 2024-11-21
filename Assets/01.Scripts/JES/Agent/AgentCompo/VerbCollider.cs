@@ -1,11 +1,10 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum AttributeType
 {
-    Win,Defeat,Hot,Sink,Shut
+    Win, Defeat, Hot, Sink, Shut
 }
 public class VerbCollider : MonoBehaviour, IAgentCompo
 {
@@ -13,9 +12,9 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private BoxCollider2D _collider;
     [SerializeField] private StageData _stageData;
     private string _stageName => SceneManager.GetActiveScene().name;
-    
-    private bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
-    
+
+    private bool _isWin = false, _isDefeat = false, _isHot = false, _isSink = false, _isShut = false;
+
     public void Initialize(Agent agent)
     {
         _agent = agent;
@@ -23,7 +22,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     private bool IsFalseAndTrue()
     {
-        return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
+        return _isWin || _isDefeat || _isHot || _isSink || _isShut;
     }
 
     public void ToggleAttribueCollider(AttributeType type, bool value)
@@ -46,22 +45,23 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 _isShut = value;
                 break;
         }
-        if (!(IsFalseAndTrue()&&!value))
+        if (!(IsFalseAndTrue() && !value))
             _collider.enabled = value;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
-            if (_isDefeat&&agent._isYouState)
+            if (_isDefeat && agent._isYouState)
                 AgentOffEvent(agent);
             else if (_isHot)
             {
                 if (agent._isMelt)
                     AgentOffEvent(agent);
             }
-            else if (_isSink) {
-                    
+            else if (_isSink)
+            {
+
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
             }
@@ -73,14 +73,14 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(_agent);
                 }
             }
-            else if (_isWin&&agent._isYouState)
+            else if (_isWin && agent._isYouState)
                 WinAction();
         }
     }
 
     private static void AgentOffEvent(Agent agent)
     {
-        RollBackData data =RollBackManager.Instance.GetRollbackData(agent.moveCompo);
+        RollBackData data = RollBackManager.Instance.GetRollbackData(agent.moveCompo);
         if (data != null)
         {
             data.offObj = agent;
@@ -94,7 +94,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void WinAction()
     {
-        if(int.Parse(_stageName) == _stageData.currentStage)
+        if (int.Parse(_stageName) == _stageData.currentStage)
         {
             _stageData.currentStage++;
             _stageData.isFirst = true;
