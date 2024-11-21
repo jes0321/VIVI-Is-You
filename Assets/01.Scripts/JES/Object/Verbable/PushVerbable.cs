@@ -7,7 +7,6 @@ public class PushVerbable : Object,IVerbable
     {
         foreach (var agent in agents)
         {
-            agent.Collider.enabled = true;
             agent.IsPushable = true;
         }
     }
@@ -16,7 +15,6 @@ public class PushVerbable : Object,IVerbable
     {
         foreach (var agent in agents)
         {
-            agent.Collider.enabled = false;
             agent.IsPushable = false;
         }
     }
