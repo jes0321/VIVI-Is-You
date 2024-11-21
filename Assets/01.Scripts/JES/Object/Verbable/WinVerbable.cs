@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class WinVerbable : Object, IVerbable
 {
-    private List<EffectPlayer> _effectPlayer = new List<EffectPlayer>();
     public void VerbApply(List<Agent> agents)
     {
         agents.ForEach(agent =>
         {
             EffectPlayer player = PoolManager.Instance.Pop("WinEffect") as EffectPlayer;
             player.SetPositionAndPlay(agent.transform.position);
-            _effectPlayer.Add(player);
+            agent.effectPlayer = player;
             agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Win,true);
         });
     }
@@ -19,8 +18,8 @@ public class WinVerbable : Object, IVerbable
     {
         agents.ForEach(agent =>
         {
-            _effectPlayer[0].StopEffect();
-            _effectPlayer.RemoveAt(0);
+            agent.effectPlayer.StopEffect();
+            agent.effectPlayer = null;
             agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Win,false);
         });
     }
