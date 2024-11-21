@@ -30,15 +30,18 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         
+        
         foreach (var data in dataList)
         {
             if (data.offObj!=null)
             {
                 data.offObj.AgentOff(false);
-            } 
-        }
-        foreach (var data in dataList)
-        {
+            }
+
+            if (data.subject != null)
+            {
+                data.subject.VerbCancel(new List<Agent>());
+            }
             if (false==data.moveCompo.MoveAgent(data.moveDir,true))
             {
                 _rollBackStack.Push(dataList);
@@ -59,6 +62,14 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     public void AddOffObject(Agent agent)
     {
         RollBackData rollbackData = new RollBackData(){moveCompo = agent.moveCompo,moveDir = Vector2.zero,offObj = agent};
+        List<RollBackData> dataList = new List<RollBackData>();
+        dataList = _rollBackStack.Pop();
+        dataList.Add(rollbackData);
+        _rollBackStack.Push(dataList);
+    }
+    public void AddTransSubject(Subject agent)
+    {
+        RollBackData rollbackData = new RollBackData(){moveCompo = agent._moveCompo,moveDir = Vector2.zero,offObj = null,subject = agent};
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         dataList.Add(rollbackData);
@@ -96,4 +107,5 @@ public class RollBackData
     public Vector2 moveDir;
     public MoveCompo moveCompo;
     public Agent offObj;
+    public Subject subject;
 }

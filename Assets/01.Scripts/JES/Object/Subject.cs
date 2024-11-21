@@ -55,6 +55,7 @@ public class Subject : Object, IVerbable
         TransAgentVerbApply(agents);
         TransAgentVerbCancel(agents);
         
+        RollBackManager.Instance.AddTransSubject(this);
         agents.Clear();
     }
 
@@ -199,7 +200,8 @@ public class Subject : Object, IVerbable
     }
     private void ApplyCancel(VerbApply info)
     {
-        info.Target.VerbCancel(_agentData.agents);
+        if (info.Target as Subject == null)
+            info.Target.VerbCancel(_agentData.agents);
         _agentData.verbs.Remove(info.Target);
         info.Target = null;
     }

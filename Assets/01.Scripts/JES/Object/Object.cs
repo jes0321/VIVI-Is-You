@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Object : MonoBehaviour,IPushable
 {
-    private MoveCompo _moveCompo;
+    public MoveCompo _moveCompo;
     public bool IsPushable { get; set; } = true;
 
     protected virtual void Awake()
