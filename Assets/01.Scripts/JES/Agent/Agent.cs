@@ -19,10 +19,11 @@ public abstract class Agent : MonoBehaviour, IPushable
     public bool _isYouState = false,_isMelt=false,_isOff=false,_isOpen=false;
     
     private SpriteRenderer spriteRenderer;
+    public Collider2D Collider { get; protected set; }
     
     protected virtual void Awake()
     {
-        
+        Collider = GetComponent<Collider2D>();
         moveCompo = GetComponent<MoveCompo>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         GetComponentsInChildren<IAgentCompo>(true).ToList()

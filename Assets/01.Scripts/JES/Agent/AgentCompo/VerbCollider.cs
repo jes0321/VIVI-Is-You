@@ -14,7 +14,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     [SerializeField] private StageData _stageData;
     private string _stageName => SceneManager.GetActiveScene().name;
     
-    private bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
+    public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
     
     public void Initialize(Agent agent)
     {
@@ -25,7 +25,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     {
         return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
     }
-
     public void ToggleAttribueCollider(AttributeType type, bool value)
     {
         switch (type)
@@ -61,9 +60,11 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(agent);
             }
             else if (_isSink) {
-                    
-                AgentOffEvent(agent);
-                AgentOffEvent(_agent);
+                if (other != _agent.Collider)
+                {
+                    AgentOffEvent(agent);
+                    AgentOffEvent(_agent);
+                }
             }
             else if (_isShut)
             {
@@ -77,8 +78,15 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 WinAction();
         }
     }
+    private void Update()
+    {
+        if (_isShut&&_agent._isOpen)
+        {
+            AgentOffEvent(_agent);
+        }
+    }
 
-    private static void AgentOffEvent(Agent agent)
+    private void AgentOffEvent(Agent agent)
     {
         RollBackData data =RollBackManager.Instance.GetRollbackData(agent.moveCompo);
         if (data != null)

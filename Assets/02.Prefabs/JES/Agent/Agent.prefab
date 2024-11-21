@@ -93,6 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stageData: {fileID: 11400000, guid: f6569f9ff233ba24e9a052fa02b2af9a, type: 2}
+  _isWin: 0
+  _isDefeat: 0
+  _isHot: 0
+  _isSink: 0
+  _isShut: 0
 --- !u!50 &5525649865411780189
 Rigidbody2D:
   serializedVersion: 5
@@ -227,6 +232,9 @@ MonoBehaviour:
   AgentType: {fileID: 11400000, guid: 751b57d5b31af0b499d04d77c69f6f0e, type: 2}
   <inputReader>k__BackingField: {fileID: 11400000, guid: b42f9527ce5bdc442bdf4099d2c50109, type: 2}
   _isYouState: 0
+  _isMelt: 0
+  _isOff: 0
+  _isOpen: 0
 --- !u!114 &7590860784958388060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +282,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8504398194988413913}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
