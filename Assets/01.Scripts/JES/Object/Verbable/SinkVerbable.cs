@@ -6,7 +6,7 @@ public class SinkVerbable : Object, IVerbable
     {
         agents.ForEach(agent =>
         {
-            agent.GetCompo<VerbCollider>().ToggleSinkCollider(true);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Sink,true);
         });
     }
 
@@ -14,7 +14,7 @@ public class SinkVerbable : Object, IVerbable
     {
         agents.ForEach(agent =>
         {
-            agent.GetCompo<VerbCollider>().ToggleSinkCollider(false);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Sink,false);
         });
     }
 }
