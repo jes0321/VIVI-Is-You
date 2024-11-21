@@ -51,23 +51,30 @@ public class MoveCompo : MonoBehaviour
     #endregion
 
     #region Push
-
+    
     private bool PushDitect(Vector2 Vec)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position+new Vector3(Vec.x*0.6f,Vec.y*0.6f,0), Vec,0.4f);
-    
-        // 레이가 충돌한 경우 IPushable 인터페이스가 있는지 확인
-        if (hit.collider != null)
+        RaycastHit2D[] col = Physics2D.RaycastAll(transform.position+new Vector3(Vec.x*0.6f,Vec.y*0.6f,0), Vec,0.4f);
+        bool value = true;
+        foreach (var hit in col)
         {
-            if (hit.collider.TryGetComponent(out IPushable pushable))
-            { 
-                if (pushable.IsPushable)
-                {
-                    return pushable.MoveObject(Vec);
+            // 레이가 충돌한 경우 IPushable 인터페이스가 있는지 확인
+            if (hit.collider != null)
+            {
+                if (hit.collider.TryGetComponent(out IPushable pushable))
+                { 
+                    if (pushable.IsPushable)
+                    {
+                        if (!pushable.MoveObject(Vec))
+                        {
+                            value = false;
+                        }
+                    }
                 }
-                return true;
             }
+            return value;
         }
+        
         return true;
     } 
     #endregion

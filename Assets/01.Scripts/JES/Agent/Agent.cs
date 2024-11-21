@@ -16,15 +16,16 @@ public abstract class Agent : MonoBehaviour, IPushable
     public MoveCompo moveCompo { get; protected set; }
     [field: SerializeField]public InputReader inputReader{get; protected set;}
 
-    public bool _isYouState = false,_isMelt=false,_isOff=false,_isOpen;
+    public bool _isYouState = false,_isMelt=false,_isOff=false,_isOpen=false;
     
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
+    public Collider2D Collider { get; protected set; }
     
     protected virtual void Awake()
     {
-        
+        Collider = GetComponent<Collider2D>();
         moveCompo = GetComponent<MoveCompo>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         GetComponentsInChildren<IAgentCompo>(true).ToList()
             .ForEach(component=>_compoDic.Add(component.GetType(), component));
         InitComponents();
@@ -49,7 +50,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     public void AgentOff(bool value)
     {
         _isOff = value;
-        spriteRenderer.enabled = !value;
+        _spriteRenderer.enabled = !value;
     } 
     #region compoSet
 
@@ -86,12 +87,12 @@ public abstract class Agent : MonoBehaviour, IPushable
     #endregion
     public void UpdateData(AgentDataSO data)
     {
-        spriteRenderer.sprite = data._sprite;
+        _spriteRenderer.sprite = data._sprite;
         AgentType = data;
     }
     public void YouStateTrans(bool value)
     {
-        spriteRenderer.sortingLayerName = value ? "Player" : "Object";
+        _spriteRenderer.sortingLayerName = value ? "Player" : "Object";
 
         _isYouState = value;
     }
