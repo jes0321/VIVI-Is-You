@@ -6,8 +6,8 @@ public class HotVerbable : Object, IVerbable
     public void VerbApply(List<Agent> agents)
     {
         agents.ForEach(agent =>
-        {
-            agent.GetCompo<VerbCollider>().ToggleHotCollider(true);
+        {            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Hot,true);
+
         });
     }
 
@@ -15,7 +15,7 @@ public class HotVerbable : Object, IVerbable
     {
         agents.ForEach(agent =>
         {
-            agent.GetCompo<VerbCollider>().ToggleHotCollider(false);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Hot,false);
         });
     }
 }

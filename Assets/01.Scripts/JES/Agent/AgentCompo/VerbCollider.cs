@@ -1,7 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum AttributeType
+{
+    Win,Defeat,Hot,Sink,Shut
+}
 public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
@@ -9,7 +14,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     [SerializeField] private StageData _stageData;
     private string _stageName => SceneManager.GetActiveScene().name;
     
-    private bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false;
+    private bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
     
     public void Initialize(Agent agent)
     {
@@ -18,35 +23,31 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     private bool IsFalseAndTrue()
     {
-        return _isWin || _isDefeat|| _isHot|| _isSink;
+        return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
     }
-    public void ToggleWinCollider(bool value)
+
+    public void ToggleAttribueCollider(AttributeType type, bool value)
     {
-        _isWin = value;
-        if (IsFalseAndTrue()&&!value)
-            return;
-        _collider.enabled = value;
-    }
-    public void ToggleSinkCollider(bool value)
-    {
-        _isSink= value;
-        if (IsFalseAndTrue()&&!value)
-            return;
-        _collider.enabled = value;
-    }
-    public void ToggleHotCollider(bool value)
-    {
-        _isHot = value;
-        if (IsFalseAndTrue()&&!value)
-            return;
-        _collider.enabled = value;
-    }
-    public void ToggleDefeatCollider(bool value)
-    {
-        _isDefeat = value;
-        if (IsFalseAndTrue()&&!value)
-            return;
-        _collider.enabled = value;
+        switch (type)
+        {
+            case AttributeType.Win:
+                _isWin = value;
+                break;
+            case AttributeType.Defeat:
+                _isDefeat = value;
+                break;
+            case AttributeType.Sink:
+                _isSink = value;
+                break;
+            case AttributeType.Hot:
+                _isHot = value;
+                break;
+            case AttributeType.Shut:
+                _isShut = value;
+                break;
+        }
+        if (!(IsFalseAndTrue()&&!value))
+            _collider.enabled = value;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -64,6 +65,14 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
             }
+            else if (_isShut)
+            {
+                if (agent._isOpen)
+                {
+                    AgentOffEvent(agent);
+                    AgentOffEvent(_agent);
+                }
+            }
             else if (_isWin&&agent._isYouState)
                 WinAction();
         }
@@ -72,7 +81,14 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private static void AgentOffEvent(Agent agent)
     {
         RollBackData data =RollBackManager.Instance.GetRollbackData(agent.moveCompo);
-        data.offObj = agent;
+        if (data != null)
+        {
+            data.offObj = agent;
+        }
+        else
+        {
+            RollBackManager.Instance.AddOffObject(agent);
+        }
         agent.AgentOff(true);
     }
 

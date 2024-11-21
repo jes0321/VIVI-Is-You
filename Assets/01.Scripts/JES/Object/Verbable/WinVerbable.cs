@@ -10,7 +10,7 @@ public class WinVerbable : Object, IVerbable
         {
             _effectPlayer = PoolManager.Instance.Pop("WinEffect") as EffectPlayer;
             _effectPlayer.SetPositionAndPlay(agent.transform.position);
-            agent.GetCompo<VerbCollider>().ToggleWinCollider(true);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Win,true);
         });
     }
 
@@ -19,7 +19,8 @@ public class WinVerbable : Object, IVerbable
         agents.ForEach(agent =>
         {
             _effectPlayer.StopEffect();
-            agent.GetCompo<VerbCollider>().ToggleWinCollider(false);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Win,false);
+
         });
     }
 }

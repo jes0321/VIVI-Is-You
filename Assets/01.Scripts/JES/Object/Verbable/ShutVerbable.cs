@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefeatVerbable : Object, IVerbable
+public class ShutVerbable : Object,IVerbable
 {
     public void VerbApply(List<Agent> agents)
     {
         agents.ForEach(agent =>
         {
-            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Defeat,true);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Shut,true);
         });
     }
+
     public void VerbCancel(List<Agent> agents)
     {
         agents.ForEach(agent =>
         {
-            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Defeat,false);
+            agent.GetCompo<VerbCollider>().ToggleAttribueCollider(AttributeType.Shut,false);
         });
     }
 }

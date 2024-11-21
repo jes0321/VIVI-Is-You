@@ -56,6 +56,14 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         _dummyList.Add(rollbackData);
     }
 
+    public void AddOffObject(Agent agent)
+    {
+        RollBackData rollbackData = new RollBackData(){moveCompo = agent.moveCompo,moveDir = Vector2.zero,offObj = agent};
+        List<RollBackData> dataList = new List<RollBackData>();
+        dataList = _rollBackStack.Pop();
+        dataList.Add(rollbackData);
+        _rollBackStack.Push(dataList);
+    }
     public RollBackData GetRollbackData(MoveCompo moveCompo)
     {
         List<RollBackData> dataList = new List<RollBackData>();
