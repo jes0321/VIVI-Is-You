@@ -8,9 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 407183952290123968, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee6800a4a05be6f43bd0a6ca615cb399, type: 3}
     - target: {fileID: 2903452282572917813, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
       propertyPath: m_Name
       value: MeltVerbable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554898658033872850, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554898658033872850, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6752183236200187849, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
       propertyPath: m_LocalPosition.x

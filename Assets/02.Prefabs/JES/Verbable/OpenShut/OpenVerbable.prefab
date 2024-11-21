@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 407183952290123968, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5942d0507ff39b478f9c2434ccb1a5e, type: 3}
     - target: {fileID: 2903452282572917813, guid: 75d3070624f25684eb2cfc6429818e69, type: 3}
       propertyPath: m_Name
       value: OpenVerbable
