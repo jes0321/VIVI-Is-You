@@ -50,9 +50,9 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Agent>(out Agent agent)&&agent._isYouState)
+        if (other.TryGetComponent<Agent>(out Agent agent))
         {
-            if (_isDefeat)
+            if (_isDefeat&&agent._isYouState)
                 AgentOffEvent(agent);
             else if (_isHot)
             {
@@ -64,7 +64,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
             }
-            else if (_isWin)
+            else if (_isWin&&agent._isYouState)
                 WinAction();
         }
     }
