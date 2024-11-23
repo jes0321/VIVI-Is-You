@@ -1,21 +1,18 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    public StageData stageData;
-
     private void Awake()
     {
+        StageData data = DataManger.Instance.saveData;
         int btnNum = 1;
         GetComponentsInChildren<BtnEnable>().ToList().ForEach(btn =>
         {
-            btn.Initialized(btnNum,stageData.currentStage,stageData.isFirst);
+            btn.Initialized(btnNum,data.currentStage,data.isFirst);
             btnNum++;
         });
-        stageData.isFirst = false;
+        data.isFirst = false;
     }
 }
 

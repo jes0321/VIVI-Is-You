@@ -11,7 +11,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
     private BoxCollider2D _collider;
-    [SerializeField] private StageData _stageData;
+    private StageData _stageData=DataManger.Instance.saveData;
     private string _stageName => SceneManager.GetActiveScene().name;
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
