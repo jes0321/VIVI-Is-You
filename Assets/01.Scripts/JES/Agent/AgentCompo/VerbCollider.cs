@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,18 +11,21 @@ public enum AttributeType
 public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
-    private WinAction _winAct;
     private BoxCollider2D _collider;
     private StageData _stageData=DataManger.Instance.saveData;
+
+    [SerializeField] private GameObject _winText;
     private string _stageName => SceneManager.GetActiveScene().name;
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
-    
+
+
     public void Initialize(Agent agent)
     {
         _agent = agent;
         _collider = GetComponent<BoxCollider2D>();
     }
+
     private bool IsFalseAndTrue()
     {
         return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
@@ -104,13 +108,19 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void WinAction()
     {
-        if(int.Parse(_stageName) == _stageData.currentStage)
+        _winText.SetActive(true);
+
+        if (int.Parse(_stageName) == _stageData.currentStage)
         {
             _stageData.currentStage++;
             _stageData.isFirst = true;
-            _winAct.WinText();
         }
-
+        StartCoroutine(WaitText());
+        
+    }
+    IEnumerator WaitText()
+    {
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneName.LobbyScene);
     }
 }

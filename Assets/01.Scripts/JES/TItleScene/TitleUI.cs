@@ -13,7 +13,7 @@ public class TitleUI : MonoBehaviour
 
     private void Awake()
     {
-        StartBtn(); 
+        StartBtn();
     }
     private void Start()
     {
