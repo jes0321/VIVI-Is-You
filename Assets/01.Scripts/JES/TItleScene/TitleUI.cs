@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Data;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleUI : MonoBehaviour
 {
@@ -19,6 +21,18 @@ public class TitleUI : MonoBehaviour
             
             float time = Random.Range(3.5f,4.5f);
             logo.DOMoveY(curPos + -pos*2, time).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        }
+    }
+
+    public void StartBtn()
+    {
+        if (DataManger.Instance.saveData.currentStage == 0)
+        {
+            SceneManager.LoadScene("0");
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneName.LobbyScene);
         }
     }
 }

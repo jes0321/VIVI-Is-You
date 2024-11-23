@@ -5,15 +5,18 @@ public class DataManger : MonoSingleton<DataManger>
     public StageData saveData;
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         LoadData();
     }
-    public void SaveData()
+
+    private void SaveData()
     {
         SaveManager.Save(saveData,"StageJson");
 
         LoadData();
     }
-    public void LoadData()
+
+    private void LoadData()
     {
         saveData = SaveManager.Load<StageData>("StageJson");
         if (saveData == null)

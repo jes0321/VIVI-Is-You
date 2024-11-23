@@ -4,8 +4,6 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance = null;
     private static bool IsDestroyed = false;
-
-    private static bool _isDontDestroyOnLoad = false;
     
     public static T Instance
     {
@@ -21,8 +19,6 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                     Debug.LogError($"{typeof(T).Name} singleton is not exist");
                 else
                 {
-                    if(_isDontDestroyOnLoad)
-                        DontDestroyOnLoad(_instance);
                     IsDestroyed = false;
                 }
             }
