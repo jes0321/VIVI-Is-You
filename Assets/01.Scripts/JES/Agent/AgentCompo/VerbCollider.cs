@@ -10,6 +10,7 @@ public enum AttributeType
 public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
+    private WinAction _winAct;
     private BoxCollider2D _collider;
     private StageData _stageData=DataManger.Instance.saveData;
     private string _stageName => SceneManager.GetActiveScene().name;
@@ -52,14 +53,15 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
-            if (_isDefeat&&agent._isYouState)
+            if (_isDefeat && agent._isYouState)
                 AgentOffEvent(agent);
             else if (_isHot)
             {
                 if (agent._isMelt)
                     AgentOffEvent(agent);
             }
-            else if (_isSink) {
+            else if (_isSink)
+            {
                 if (other != _agent.Collider)
                 {
                     AgentOffEvent(agent);
@@ -74,7 +76,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(_agent);
                 }
             }
-            else if (_isWin&&agent._isYouState)
+            else if (_isWin && agent._isYouState)
                 WinAction();
         }
     }
@@ -106,6 +108,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         {
             _stageData.currentStage++;
             _stageData.isFirst = true;
+            _winAct.WinText();
         }
 
         SceneManager.LoadScene(SceneName.LobbyScene);
