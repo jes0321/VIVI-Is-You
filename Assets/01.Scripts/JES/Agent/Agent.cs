@@ -19,6 +19,7 @@ public abstract class Agent : MonoBehaviour, IPushable
     public bool _isYouState = false,_isMelt=false,_isOff=false,_isOpen=false;
     
     private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer SpriteRenderer=> _spriteRenderer;
     public Collider2D Collider { get; protected set; }
 
     public EffectPlayer effectPlayer;
