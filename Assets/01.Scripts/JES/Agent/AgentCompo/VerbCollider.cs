@@ -108,7 +108,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void WinActionEvent()
     {
-        WinAction.Instance.WinText();
+        WinAction.Instance.HandleFadeEvent(false);
         if (int.Parse(_stageName) == _stageData.currentStage)
         {
             _stageData.currentStage++;
