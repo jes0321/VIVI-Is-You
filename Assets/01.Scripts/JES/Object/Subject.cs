@@ -103,13 +103,21 @@ public class Subject : Object, IVerbable
                 agent.UpdateData(_transData);
                 _agentData.agents.Remove(agent);
             });
-            
-            _transData.verbs.Remove(this);
-            _transData.verbs.ForEach(verb =>
+
+            try
             {
-                verb.VerbApply(_transAgents);
-            });
-            
+                _transData.verbs.ForEach(verb =>
+                {
+                    if (verb != this)
+                    {
+                        verb.VerbApply(_transAgents);
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+            }
             _isRollback = false;
             _transAgents.Clear();
             _transData = null;
