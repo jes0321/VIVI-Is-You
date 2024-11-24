@@ -5124,7 +5124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1841684345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5641,6 +5641,14 @@ PrefabInstance:
     - target: {fileID: 1577352665508375520, guid: e96ca4b0e3835eb4ea813882f6edf14e, type: 3}
       propertyPath: m_Name
       value: Manager (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159860896385494863, guid: e96ca4b0e3835eb4ea813882f6edf14e, type: 3}
+      propertyPath: _bgmSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b6a2f7ee834d004989a7377bb5c26fa, type: 2}
+    - target: {fileID: 4813199632686098172, guid: e96ca4b0e3835eb4ea813882f6edf14e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7526225565471787775, guid: e96ca4b0e3835eb4ea813882f6edf14e, type: 3}
       propertyPath: _floor
