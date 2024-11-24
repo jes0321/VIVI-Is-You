@@ -4857,8 +4857,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -755671871
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4904,4 +4904,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d27763859dfd44289fdb8b3fc6895b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isRoop: 0
   poolName: Unlock1

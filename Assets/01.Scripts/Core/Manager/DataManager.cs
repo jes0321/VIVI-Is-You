@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataManger : MonoSingleton<DataManger>
 {
@@ -7,6 +8,8 @@ public class DataManger : MonoSingleton<DataManger>
     {
         DontDestroyOnLoad(gameObject);
         LoadData();
+
+        SceneManager.sceneUnloaded += (scene)=>SaveData();
     }
 
     private void SaveData()
@@ -36,4 +39,5 @@ public class StageData
 {
     public int currentStage=0;
     public bool isFirst = false;
+    public float sfxVol = 1, bgmVol = 1,MasterVol=1;
 }

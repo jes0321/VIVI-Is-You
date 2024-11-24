@@ -14,7 +14,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private BoxCollider2D _collider;
     private StageData _stageData=DataManger.Instance.saveData;
 
-    [SerializeField] private GameObject _winText;
     private string _stageName => SceneManager.GetActiveScene().name;
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
@@ -81,7 +80,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 }
             }
             else if (_isWin && agent._isYouState)
-                WinAction();
+                WinActionEvent();
         }
     }
     private void Update()
@@ -106,21 +105,13 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         agent.AgentOff(true);
     }
 
-    private void WinAction()
+    private void WinActionEvent()
     {
-        _winText.SetActive(true);
-
+        WinAction.Instance.WinText();
         if (int.Parse(_stageName) == _stageData.currentStage)
         {
             _stageData.currentStage++;
             _stageData.isFirst = true;
         }
-        StartCoroutine(WaitText());
-        
-    }
-    IEnumerator WaitText()
-    {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneName.LobbyScene);
     }
 }

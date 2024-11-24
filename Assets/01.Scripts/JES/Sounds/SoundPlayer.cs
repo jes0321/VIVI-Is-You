@@ -53,8 +53,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
         PoolManager.Instance.Push(this);
     }
 
-    public string PoolName => poolName;
-    public string poolName = "SoundPlayer";
+    public string PoolName => _poolName;
     public GameObject ObjectPrefab => gameObject;
 
     public void ResetItem()
