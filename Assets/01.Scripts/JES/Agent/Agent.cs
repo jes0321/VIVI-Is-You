@@ -23,6 +23,8 @@ public abstract class Agent : MonoBehaviour, IPushable
     public Collider2D Collider { get; protected set; }
 
     public EffectPlayer effectPlayer;
+
+    [SerializeField] private SoundSO _walkSound;
     
     protected virtual void Awake()
     {
@@ -47,7 +49,11 @@ public abstract class Agent : MonoBehaviour, IPushable
         if(!_isYouState) return;
         RollBackManager.Instance.ListReset();
         if(_isOff) return;
-        MoveObject(obj);
+        if (MoveObject(obj))
+        {
+            SoundPlayer player = PoolManager.Instance.Pop("SoundPlayer") as SoundPlayer;
+            player.PlaySound(_walkSound);
+        }
     }
 
     public void AgentOff(bool value)
