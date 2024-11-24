@@ -7,14 +7,9 @@ public class WinAction : MonoSingleton<WinAction>
     [SerializeField] private GameObject _mapGrid;
     [SerializeField] private TextMeshProUGUI _winText;
 
-    public void InitializeGrid()
+    public void WinText()
     {
         _mapGrid.SetActive(false);
         _winText.enabled = true;
-    }
-
-    public void WinText()
-    {
-        InitializeGrid();
     }
 }

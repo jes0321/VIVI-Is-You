@@ -10,6 +10,7 @@ public class TitleUI : MonoBehaviour
 
     [SerializeField] private float force = 0.1f;
     private int count = 1;
+
     private void Start()
     {
         foreach (Transform logo in _titleTrms)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,15 +13,19 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private Agent _agent;
     private BoxCollider2D _collider;
     private StageData _stageData=DataManger.Instance.saveData;
+
+    [SerializeField] private GameObject _winText;
     private string _stageName => SceneManager.GetActiveScene().name;
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
-    
+
+
     public void Initialize(Agent agent)
     {
         _agent = agent;
         _collider = GetComponent<BoxCollider2D>();
     }
+
     private bool IsFalseAndTrue()
     {
         return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
@@ -52,14 +57,15 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
-            if (_isDefeat&&agent._isYouState)
+            if (_isDefeat && agent._isYouState)
                 AgentOffEvent(agent);
             else if (_isHot)
             {
                 if (agent._isMelt)
                     AgentOffEvent(agent);
             }
-            else if (_isSink) {
+            else if (_isSink)
+            {
                 if (other != _agent.Collider)
                 {
                     AgentOffEvent(agent);
@@ -74,7 +80,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(_agent);
                 }
             }
-            else if (_isWin&&agent._isYouState)
+            else if (_isWin && agent._isYouState)
                 WinAction();
         }
     }
@@ -102,12 +108,19 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void WinAction()
     {
-        if(int.Parse(_stageName) == _stageData.currentStage)
+        _winText.SetActive(true);
+
+        if (int.Parse(_stageName) == _stageData.currentStage)
         {
             _stageData.currentStage++;
             _stageData.isFirst = true;
         }
-
+        StartCoroutine(WaitText());
+        
+    }
+    IEnumerator WaitText()
+    {
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneName.LobbyScene);
     }
 }
