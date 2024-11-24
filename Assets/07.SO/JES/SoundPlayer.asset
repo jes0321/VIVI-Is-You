@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899fb8dc93bb03d4c8c4910e1e615626, type: 3}
-  m_Name: StagePool
+  m_Script: {fileID: 11500000, guid: 22ea6c7db6fd6aa4f8a1801dc56c20da, type: 3}
+  m_Name: SoundPlayer
   m_EditorClassIdentifier: 
-  list:
-  - {fileID: 11400000, guid: 38bdc935f268e4043b157e4f2843425b, type: 2}
-  - {fileID: 11400000, guid: 3501c2d869445924ea4bc3efa99be8e6, type: 2}
+  poolName: SoundPlayer
+  prefab: {fileID: 6457695893321397851, guid: f68b1dee926d83043b685b97b8fa0e7a, type: 3}
+  count: 3

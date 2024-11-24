@@ -51,6 +51,8 @@ public class Subject : Object, IVerbable
     }
     public void VerbApply(List<Agent> agents)
     {
+        if (agents.Count == 0) return;
+
         TransAgent(agents);
         TransAgentVerbApply(agents);
         TransAgentVerbCancel(agents);
@@ -200,8 +202,9 @@ public class Subject : Object, IVerbable
     }
     private void ApplyCancel(VerbApply info)
     {
-        if (info.Target as Subject == null)
-            info.Target.VerbCancel(_agentData.agents);
+        if (info.Target == null) return;
+        
+        info.Target.VerbCancel(_agentData.agents);
         _agentData.verbs.Remove(info.Target);
         info.Target = null;
     }
