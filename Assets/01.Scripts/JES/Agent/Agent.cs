@@ -10,7 +10,7 @@ public enum AgentType
 {
     VIVI,WALL,BOX,DOOR,FLAG
 }
-public abstract class Agent : MonoBehaviour, IPushable
+public class Agent : MonoBehaviour, IPushable
 {
     public AgentDataSO AgentType;
     public MoveCompo moveCompo { get; protected set; }

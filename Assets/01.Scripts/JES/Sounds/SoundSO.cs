@@ -15,6 +15,10 @@ public class SoundSO : ScriptableObject
     public bool loop = false;
     public bool randomizePitch = false;
 
+    [Header("PlayTime")]
+    public float playTime;
+    public bool isPlayerTime=false;
+    
     [Range(0, 1f)] public float randomPicthModifier = 0.1f;
     [Range(0.1f, 2f)] public float volume = 1f;
     [Range(0.1f, 3f)] public float basePitch = 1f;

@@ -12,7 +12,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
     private BoxCollider2D _collider;
-    private StageData _stageData=DataManger.Instance.saveData;
+    private StageData _stageData;
 
     private string _stageName => SceneManager.GetActiveScene().name;
     
@@ -23,6 +23,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     {
         _agent = agent;
         _collider = GetComponent<BoxCollider2D>();
+        _stageData =DataManger.Instance.saveData;
     }
 
     private bool IsFalseAndTrue()
