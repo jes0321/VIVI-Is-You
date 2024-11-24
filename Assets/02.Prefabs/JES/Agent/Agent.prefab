@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e834a9f37cd243068c87487eb288089d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stageData: {fileID: 11400000, guid: f6569f9ff233ba24e9a052fa02b2af9a, type: 2}
   _isWin: 0
   _isDefeat: 0
   _isHot: 0
@@ -235,6 +234,8 @@ MonoBehaviour:
   _isMelt: 0
   _isOff: 0
   _isOpen: 0
+  effectPlayer: {fileID: 0}
+  _walkSound: {fileID: 11400000, guid: 04034acba7e41fb4ea4c579ee4f3dda2, type: 2}
 --- !u!114 &7590860784958388060
 MonoBehaviour:
   m_ObjectHideFlags: 0

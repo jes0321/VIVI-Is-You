@@ -9,8 +9,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
 {
     [SerializeField] private AudioMixerGroup _sfxGroup, _musicGroup;
     [SerializeField] private string _poolName;
-
-
+    
     private AudioSource _audioSource;
 
     private void Awake()
@@ -41,7 +40,7 @@ public class SoundPlayer : MonoBehaviour, IPoolable
 
         if (!data.loop)
         {
-            float time = _audioSource.clip.length + 0.2f;
+            float time = data.isPlayerTime ? data.playTime : _audioSource.clip.length + 0.2f;
             DOVirtual.DelayedCall(time, () => PoolManager.Instance.Push(this));
         }
         _audioSource.Play();
