@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -46,7 +47,15 @@ public class BtnEnable : MonoBehaviour
         EffectPlayer effectPlayer = null;
         Vector3 myWorldPos = Camera.main.ScreenToWorldPoint(transform.position);
         yield return new WaitForSeconds(1f);
-        effectPlayer = PoolManager.Instance.Pop(_effectName + 1) as EffectPlayer;
+        try
+        {
+            effectPlayer = PoolManager.Instance.Pop(_effectName + 1) as EffectPlayer;
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+            yield break;
+        }
 
         effectPlayer.SetPositionAndPlay(myWorldPos);
         yield return _sleep;
