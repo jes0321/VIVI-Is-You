@@ -12,7 +12,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
     private Agent _triggerAgent;
-    private BoxCollider2D _collider;
+    public BoxCollider2D _collider;
     private StageData _stageData;
 
     private string _stageName => SceneManager.GetActiveScene().name;
