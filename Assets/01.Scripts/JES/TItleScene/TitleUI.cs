@@ -29,7 +29,7 @@ public class TitleUI : MonoBehaviour
     {
         if (DataManger.Instance.saveData.currentStage == 0)
         {
-            SceneManager.LoadScene("0");
+            SceneManager.LoadScene("InfoScene");
         }
         else
         {

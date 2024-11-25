@@ -58,6 +58,7 @@ public class Agent : MonoBehaviour, IPushable
     {
         _isOff = value;
         _spriteRenderer.enabled = !value;
+        GetCompo<VerbCollider>()._collider.enabled = !value;
     } 
     #region compoSet
 

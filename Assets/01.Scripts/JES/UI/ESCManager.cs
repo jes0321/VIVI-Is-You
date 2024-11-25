@@ -55,7 +55,10 @@ public class ESCManager : MonoBehaviour
     public void ExitBtnClick()
     {
         EscOnOff(_isEscOpen);
-        SceneManager.LoadScene(SceneName.LobbyScene);
+        if(SceneManager.GetActiveScene().name == SceneName.LobbyScene)
+            SceneManager.LoadScene("StartScene");
+        else
+            SceneManager.LoadScene(SceneName.LobbyScene);
     }
     
 }
