@@ -15,7 +15,7 @@ public class ESCManager : MonoBehaviour
     {
         BGM.value = DataManger.Instance.saveData.bgmVol;
         SFX.value = DataManger.Instance.saveData.sfxVol;
-        Master.value = DataManger.Instance.saveData.MasterVol;
+        Master.value = DataManger.Instance.saveData.masterVol;
     }
 
     public void SFXSoundChange(float value)

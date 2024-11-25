@@ -53,7 +53,18 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         if (!(IsFalseAndTrue()&&!value))
             _collider.enabled = value;
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TriggerEvent(other);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
+    {
+        TriggerEvent(other);
+    }
+
+    private void TriggerEvent(Collider2D other)
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
@@ -85,6 +96,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
             
         }
     }
+
     private void Update()
     {
         if (_isShut&&_agent._isOpen)

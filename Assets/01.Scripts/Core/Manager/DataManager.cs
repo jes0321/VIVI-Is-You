@@ -39,5 +39,5 @@ public class StageData
 {
     public int currentStage=0;
     public bool isFirst = false;
-    public float sfxVol = 1, bgmVol = 1,MasterVol=1;
+    public float sfxVol = 1, bgmVol = 1,masterVol=1;
 }
