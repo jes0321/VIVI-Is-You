@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ESCManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private GameObject ESCMenu;
     [SerializeField] private Slider Master, SFX, BGM;
     [SerializeField] private AudioMixer _audioMixer;
+    
+    private bool _isEscOpen = false;
     private void Awake()
     {
         BGM.value = DataManger.Instance.saveData.bgmVol;
@@ -26,6 +29,30 @@ public class ESCManager : MonoBehaviour
     public void MasterSoundChange(float value)
     {
         _audioMixer.SetFloat("MasterParam", Mathf.Log10(value) * 20);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EscOnOff(_isEscOpen);
+        }
+    }
+
+    private void EscOnOff(bool value)
+    {
+        _isEscOpen = !value;
+        ESCMenu.SetActive(value);
+        Time.timeScale = value ? 0f : 1f;
+    }
+    public void OffBtnClick()
+    {
+        EscOnOff(_isEscOpen);
+    }
+    public void ExitBtnClick()
+    {
+        EscOnOff(_isEscOpen);
+        SceneManager.LoadScene(SceneName.LobbyScene);
     }
     
 }
