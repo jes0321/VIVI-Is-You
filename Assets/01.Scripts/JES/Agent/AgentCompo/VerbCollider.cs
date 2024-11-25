@@ -119,7 +119,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
             if (_isWin && _triggerAgent._isYouState)
             {
-                WinActionEvent(_agent);
+                WinActionEvent(_triggerAgent);
             }
         }
     }
