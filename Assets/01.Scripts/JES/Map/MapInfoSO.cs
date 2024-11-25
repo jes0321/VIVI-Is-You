@@ -27,6 +27,18 @@ public class MapInfoSO : ScriptableObject
         
         return worldPos;
     }
+    public Vector3 CellCenterPosNoneLimit(Vector3 pos, Vector2Int dir)
+    {
+        Vector3Int curPos = _floorTilemap.WorldToCell(pos);
+
+        Vector3Int nextPos = curPos + new Vector3Int(dir.x,dir.y,0);
+
+        Vector3 worldPos;
+        
+        worldPos = _floorTilemap.GetCellCenterWorld(nextPos);
+        
+        return worldPos;
+    }
 
     public bool CanMoveThis(Vector3Int pos)
     {
