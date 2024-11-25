@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum AgentType
 {
-    VIVI,WALL,BOX,DOOR,FLAG
+    VIVI,WALL,BOX,DOOR,FLAG,Water,Cactus
 }
 public class Agent : MonoBehaviour, IPushable
 {
