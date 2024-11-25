@@ -11,6 +11,7 @@ public enum AttributeType
 public class VerbCollider : MonoBehaviour, IAgentCompo
 {
     private Agent _agent;
+    private Agent _triggerAgent;
     private BoxCollider2D _collider;
     private StageData _stageData;
 
@@ -53,21 +54,21 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         if (!(IsFalseAndTrue()&&!value))
             _collider.enabled = value;
     }
-
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         TriggerEvent(other);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        TriggerEvent(other);
+        _triggerAgent = null;
     }
 
     private void TriggerEvent(Collider2D other)
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
+            _triggerAgent = agent;
             if (_isDefeat && agent._isYouState)
                 AgentOffEvent(agent);
             else if (_isHot)
@@ -107,6 +108,19 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         if (_isWin && _agent._isYouState)
         {
             WinActionEvent(_agent);
+        }
+
+        if (_triggerAgent != null)
+        {
+            if (_isShut&&_triggerAgent._isOpen)
+            {
+                AgentOffEvent(_agent);
+            }
+
+            if (_isWin && _triggerAgent._isYouState)
+            {
+                WinActionEvent(_agent);
+            }
         }
     }
 
