@@ -42,14 +42,14 @@ public class MoveCompo : MonoBehaviour,IAgentCompo
             moveVector.y = 0;
         }
 
-        Vector3 movePos;
-        if (_agent._isOpen&&FrontIsShut(moveVector))
+        Vector3 movePos=mapInfoSo.CellCenterPos(transform.position,moveVector);
+
+        if (_agent != null)
         {
-            movePos = mapInfoSo.CellCenterPosNoneLimit(transform.position,moveVector);
-        }
-        else
-        {
-            movePos =  mapInfoSo.CellCenterPos(transform.position,moveVector);
+            if (_agent._isOpen&&FrontIsShut(moveVector))
+            {
+                movePos = mapInfoSo.CellCenterPosNoneLimit(transform.position,moveVector);
+            }
         }
         
         if (!isRoll&&movePos!=Vector3.zero)
