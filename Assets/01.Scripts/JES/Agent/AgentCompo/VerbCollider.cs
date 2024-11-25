@@ -80,8 +80,9 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(_agent);
                 }
             }
-            else if (_isWin && agent._isYouState)
-                WinActionEvent();
+            else if (_isWin && agent._isYouState) 
+                WinActionEvent(agent);
+            
         }
     }
     private void Update()
@@ -89,6 +90,11 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         if (_isShut&&_agent._isOpen)
         {
             AgentOffEvent(_agent);
+        }
+
+        if (_isWin && _agent._isYouState)
+        {
+            WinActionEvent(_agent);
         }
     }
 
@@ -106,8 +112,9 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         agent.AgentOff(true);
     }
 
-    private void WinActionEvent()
+    private void WinActionEvent(Agent agent)
     {
+        agent._isYouState = false;
         WinAction.Instance.HandleFadeEvent(false);
         if (int.Parse(_stageName) == _stageData.currentStage)
         {
