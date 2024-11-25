@@ -11,7 +11,7 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private AudioMixer _audioMixer;
     
     private bool _isEscOpen = false;
-    private void Awake()
+    private void Start()
     {
         BGM.value = DataManger.Instance.saveData.bgmVol;
         SFX.value = DataManger.Instance.saveData.sfxVol;
@@ -20,14 +20,17 @@ public class ESCManager : MonoBehaviour
 
     public void SFXSoundChange(float value)
     {
+         DataManger.Instance.saveData.sfxVol = value;
         _audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
     }
     public void BGMSoundChange(float value)
     {
+        DataManger.Instance.saveData.bgmVol = value;
         _audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
     }
     public void MasterSoundChange(float value)
     {
+        DataManger.Instance.saveData.masterVol = value;
         _audioMixer.SetFloat("MasterParam", Mathf.Log10(value) * 20);
     }
 
