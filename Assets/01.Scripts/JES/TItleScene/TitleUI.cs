@@ -36,4 +36,9 @@ public class TitleUI : MonoBehaviour
             SceneManager.LoadScene(SceneName.LobbyScene);
         }
     }
+
+    public void ExitBtn()
+    {
+        Application.Quit();
+    }
 }
