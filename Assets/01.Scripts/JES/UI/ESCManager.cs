@@ -42,8 +42,8 @@ public class ESCManager : MonoBehaviour
     private void EscOnOff(bool value)
     {
         _isEscOpen = !value;
-        ESCMenu.SetActive(value);
-        Time.timeScale = value ? 0f : 1f;
+        ESCMenu.SetActive(_isEscOpen);
+        Time.timeScale = _isEscOpen ? 0f : 1f;
     }
     public void OffBtnClick()
     {
