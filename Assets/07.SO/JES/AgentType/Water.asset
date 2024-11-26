@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a05e27a71f8ed408a1405f0cbf1dfc, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -6181277636026623647, guid: 3444b9f4d6ffeb440a3f0c959db8263d, type: 3}
+  _sprite: {fileID: 2990890074720157881, guid: 02cfabfda5630d842bd50d9312aa27ec, type: 3}
   _type: 5
   agents: []
+  isMove: 0

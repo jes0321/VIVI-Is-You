@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a05e27a71f8ed408a1405f0cbf1dfc, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: c06476d508bc05a48afcd5951689a713, type: 3}
+  _sprite: {fileID: -8745209931756140020, guid: 02cfabfda5630d842bd50d9312aa27ec, type: 3}
   _type: 8
   agents: []
   isMove: 0
