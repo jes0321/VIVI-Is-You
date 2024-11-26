@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -135,7 +136,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         {
             RollBackManager.Instance.AddOffObject(agent);
         }
-        agent.AgentOff(true);
+        agent.gameObject.SetActive(false);
     }
 
     private void WinActionEvent(Agent agent)
