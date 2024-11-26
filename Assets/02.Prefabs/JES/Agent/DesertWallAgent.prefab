@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 5314177354330779120, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 006bc190b19dfa646be21f97f3925d9e, type: 2}
+      objectReference: {fileID: -8745209931756140020, guid: 02cfabfda5630d842bd50d9312aa27ec, type: 3}
     - target: {fileID: 5314177354330779120, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504398194988413913, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_Name
-      value: HouseWallAgent 1
+      value: DesertWallAgent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
