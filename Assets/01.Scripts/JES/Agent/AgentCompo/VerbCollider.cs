@@ -19,21 +19,40 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private string _stageName => SceneManager.GetActiveScene().name;
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
-
+    
+    private bool _isRollback=false;
 
     public void Initialize(Agent agent)
     {
         _agent = agent;
         _collider = GetComponent<BoxCollider2D>();
         _stageData =DataManger.Instance.saveData;
+        _agent.inputReader.OnRollbackStartEvent += RollbackTrue;
+        _agent.inputReader.OnRollbackEndEvent += RollbackFalse;
     }
 
+    private void OnDisable()
+    {
+        _agent.inputReader.OnRollbackStartEvent -= RollbackTrue;
+        _agent.inputReader.OnRollbackEndEvent -= RollbackFalse;
+    }
+
+    private void RollbackTrue()
+    {
+        _isRollback=true;
+    }
+    private void RollbackFalse()
+    {
+        _isRollback=false;
+    }
     private bool IsFalseAndTrue()
     {
         return _isWin || _isDefeat|| _isHot|| _isSink|| _isShut;
     }
     public void ToggleAttribueCollider(AttributeType type, bool value)
     {
+        if(_isRollback) return;
+        
         switch (type)
         {
             case AttributeType.Win:
