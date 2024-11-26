@@ -20,30 +20,13 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     
     public bool _isWin=false, _isDefeat=false,_isHot=false,_isSink=false,_isShut =false;
     
-    private bool _isRollback=false;
+    public bool isRollback=false;
 
     public void Initialize(Agent agent)
     {
         _agent = agent;
         _collider = GetComponent<BoxCollider2D>();
         _stageData =DataManger.Instance.saveData;
-        _agent.inputReader.OnRollbackStartEvent += RollbackTrue;
-        _agent.inputReader.OnRollbackEndEvent += RollbackFalse;
-    }
-
-    private void OnDisable()
-    {
-        _agent.inputReader.OnRollbackStartEvent -= RollbackTrue;
-        _agent.inputReader.OnRollbackEndEvent -= RollbackFalse;
-    }
-
-    private void RollbackTrue()
-    {
-        _isRollback=true;
-    }
-    private void RollbackFalse()
-    {
-        _isRollback=false;
     }
     private bool IsFalseAndTrue()
     {
@@ -51,6 +34,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     public void ToggleAttribueCollider(AttributeType type, bool value)
     {
+        if(isRollback) return;
         
         switch (type)
         {
@@ -85,8 +69,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void TriggerEvent(Collider2D other)
     {
-        if (_isRollback) return;
-
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
             _triggerAgent = agent;
