@@ -68,7 +68,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void TriggerEvent(Collider2D other)
     {
-        if (isRollback) return;
+        if(isRollback) return;
 
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
