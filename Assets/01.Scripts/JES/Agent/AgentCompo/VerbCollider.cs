@@ -73,14 +73,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
             _triggerAgent = agent;
-            if (_isDefeat && agent._isYouState)
-                AgentOffEvent(agent);
-            else if (_isHot)
-            {
-                if (agent._isMelt)
-                    AgentOffEvent(agent);
-            }
-            else if (_isSink)
+            if (_isSink)
             {
                 if (other != _agent.Collider)
                 {
@@ -88,6 +81,13 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                     AgentOffEvent(_agent);
                 }
             }
+            else if (_isDefeat && agent._isYouState)
+                AgentOffEvent(agent);
+            else if (_isHot)
+            {
+                if (agent._isMelt)
+                    AgentOffEvent(agent);
+            } 
             else if (_isShut)
             {
                 if (agent._isOpen)
@@ -98,7 +98,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
             }
             else if (_isWin && agent._isYouState) 
                 WinActionEvent(agent);
-            
         }
     }
 
