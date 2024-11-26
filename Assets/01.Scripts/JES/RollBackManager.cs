@@ -30,11 +30,13 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         
-        
+        List<Agent> agents = new List<Agent>();
         foreach (var data in dataList)
         {
             if (data.offObj!=null)
             {
+                agents.Add(data.offObj);
+                data.offObj.GetCompo<VerbCollider>().isRollback = true;
                 data.offObj.gameObject.SetActive(true);
             }
 
@@ -48,6 +50,11 @@ public class RollBackManager : MonoSingleton<RollBackManager>
                 _lastTime = 0;
                 return;
             } 
+        }
+
+        foreach (var agent in agents)
+        {
+            agent.GetCompo<VerbCollider>().isRollback = false;
         }
         _lastTime = Time.time;
     }
