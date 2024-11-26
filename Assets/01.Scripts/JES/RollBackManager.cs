@@ -35,7 +35,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         {
             if (data.offObj!=null)
             {
-                data.offObj.AgentOff(false);
+                data.offObj.gameObject.SetActive(true);
             }
 
             if (data.subject != null)
