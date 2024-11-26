@@ -32,6 +32,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         
+        List<Agent> agents = new List<Agent>();
         foreach (var data in dataList)
         {
             if (data.offObj!=null)
@@ -45,12 +46,12 @@ public class RollBackManager : MonoSingleton<RollBackManager>
             {
                 data.subject.VerbCancel(new List<Agent>());
             }
-            if (false==data.moveCompo.MoveAgent(data.moveDir,true))
-            {
-                _rollBackStack.Push(dataList);
-                _lastTime = 0;
-                return;
-            } 
+
+            if (data.moveCompo.MoveAgent(data.moveDir, true)) continue;
+            
+            _rollBackStack.Push(dataList);
+            _lastTime = 0;
+            return;
         }
 
         _lastTime = Time.time;

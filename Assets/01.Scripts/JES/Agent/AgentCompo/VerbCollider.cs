@@ -82,11 +82,19 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
                 }
             }
             else if (_isDefeat && agent._isYouState)
+            {
                 AgentOffEvent(agent);
+                AgentOffEvent(_agent);
+                AgentOnEvent(_agent);
+            }
             else if (_isHot)
             {
                 if (agent._isMelt)
+                {
                     AgentOffEvent(agent);
+                    AgentOffEvent(_agent);
+                    AgentOnEvent(_agent);
+                }
             } 
             else if (_isShut)
             {
@@ -132,6 +140,7 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         RollBackData data =RollBackManager.Instance.GetRollbackData(agent.moveCompo);
         if (data != null)
         {
+            Debug.Log(1);
             data.offObj = agent;
         }
         else
@@ -139,6 +148,10 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
             RollBackManager.Instance.AddOffObject(agent);
         }
         agent.gameObject.SetActive(false);
+    }
+    private void AgentOnEvent(Agent agent)
+    {
+        agent.gameObject.SetActive(true);
     }
 
     private void WinActionEvent(Agent agent)

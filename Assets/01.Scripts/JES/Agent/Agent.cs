@@ -47,25 +47,19 @@ public class Agent : MonoBehaviour, IPushable
     private void HandleOnMovement(Vector2 obj)
     {
         if(!_isYouState) return;
-        if (!AgentType.isMove)
-        {
-            RollBackManager.Instance.ListReset();
-            AgentType.isMove = true;
-        }
+        
         if(_isOff) return;
         if (MoveObject(obj))
         {
+            if (!AgentType.isMove)
+            {
+                RollBackManager.Instance.ListReset();
+                AgentType.isMove = true;
+            }
             SoundPlayer player = PoolManager.Instance.Pop("SoundPlayer") as SoundPlayer;
             player.PlaySound(_walkSound);
         }
     }
-
-    public void AgentOff(bool value)
-    {
-        _isOff = value;
-        _spriteRenderer.enabled = !value;
-        GetCompo<VerbCollider>()._collider.enabled = !value;
-    } 
     #region compoSet
 
     private Dictionary<Type, IAgentCompo> _compoDic = new Dictionary<Type, IAgentCompo>();
