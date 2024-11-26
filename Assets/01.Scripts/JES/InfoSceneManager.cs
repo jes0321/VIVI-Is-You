@@ -7,6 +7,6 @@ public class InfoSceneManager : MonoBehaviour
 {
     private void Start()
     {
-        DOVirtual.DelayedCall(5f,()=>SceneManager.LoadScene("0"));
+        DOVirtual.DelayedCall(7f,()=>SceneManager.LoadScene("0"));
     }
 }
