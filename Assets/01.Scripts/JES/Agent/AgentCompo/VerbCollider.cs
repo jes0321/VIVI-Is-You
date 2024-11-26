@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -58,12 +59,14 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Agent>(out Agent agent))
+        {
             TriggerEvent(agent);
+            _triggerAgent = agent;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        
          _triggerAgent = null;
     }
 
@@ -71,40 +74,47 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     {
         if(isRollback) return;
         
-        _triggerAgent = agent;
         if (_isSink)
         {
             if (agent.Collider != _agent.Collider)
             {
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
+                return;
             }
         }
-        else if (_isDefeat && agent._isYouState)
+        if (_isDefeat && agent._isYouState)
         {
             AgentOffEvent(agent);
             AgentOffEvent(_agent);
             AgentOnEvent(_agent);
+            return;
         }
-        else if (_isHot)
+        if (_isHot)
         {
             if (agent._isMelt)
             {
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
                 AgentOnEvent(_agent);
+                return;
             }
         } 
-        else if (_isShut)
+        if (_isShut)
         {
             if (agent._isOpen)
             {
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
+                return;
             }
         }
-        else if (_isWin && agent._isYouState) 
+
+        if (_isWin && agent._isYouState)
+        {
             WinActionEvent(agent);
+            return;
+        }
     }
     private void Update()
     {
@@ -127,11 +137,22 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         {
             RollBackManager.Instance.AddOffObject(agent);
         }
+
+        List<Agent> agents = new List<Agent>(){agent};
+        foreach (var verb in agent.AgentType.verbs)
+        {
+            verb.VerbCancel(agents);
+        }
         agent.gameObject.SetActive(false);
     }
     private void AgentOnEvent(Agent agent)
     {
         agent.gameObject.SetActive(true);
+        List<Agent> agents = new List<Agent>(){agent};
+        foreach (var verb in agent.AgentType.verbs)
+        {
+            verb.VerbApply(agents);
+        }
     }
 
     private void WinActionEvent(Agent agent)
