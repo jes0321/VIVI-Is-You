@@ -51,7 +51,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     public void ToggleAttribueCollider(AttributeType type, bool value)
     {
-        if(_isRollback) return;
         
         switch (type)
         {
@@ -86,6 +85,8 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
 
     private void TriggerEvent(Collider2D other)
     {
+        if (_isRollback) return;
+
         if (other.TryGetComponent<Agent>(out Agent agent))
         {
             _triggerAgent = agent;
