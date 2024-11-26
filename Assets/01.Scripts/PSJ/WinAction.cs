@@ -20,6 +20,7 @@ public class WinAction : MonoSingleton<WinAction>
 
     public void HandleFadeEvent(bool isFadeIn)
     {
+        _fadeImage.enabled = true;
         float fadeValue = isFadeIn ? 1.2f : 0f;
         float startValue = isFadeIn ? 0f : 1.2f;
 
@@ -27,7 +28,7 @@ public class WinAction : MonoSingleton<WinAction>
 
 
 
-        var tweenCore = _fadeImage.material.DOFloat(fadeValue, _valueHash, _fadeDuration);
+        var tweenCore = _fadeImage.material.DOFloat(fadeValue, _valueHash, _fadeDuration).OnComplete(()=>_fadeImage.enabled=false);
 
         if (isFadeIn == false)
         {

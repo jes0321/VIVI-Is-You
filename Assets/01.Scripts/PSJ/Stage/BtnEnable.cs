@@ -24,11 +24,11 @@ public class BtnEnable : MonoBehaviour
         _currentStage = currentStage;
         _text.text = btnStage.ToString();
 
-        _image.SetActive(btnStage > currentStage);
+        _image.SetActive(btnStage > currentStage);//자물쇠 이미지를 끄고 키기
 
-        if (btnStage == currentStage && isFirst)
+        if (btnStage == currentStage && isFirst)//최초 클리어고, 방금 열린 스테이지 버튼인지
         {
-            StartCoroutine(UnlockStage());
+            StartCoroutine(UnlockStage());//그럼 이제 해금 이펙트 이벤트 실행
             StartCoroutine(Timer());
             IsTimeEnd = false;
         }
@@ -36,7 +36,7 @@ public class BtnEnable : MonoBehaviour
 
     public void EnterStage()
     {
-        if (_currentStage >= _btnNum && IsTimeEnd)
+        if (_currentStage >= _btnNum && IsTimeEnd)//현재 스테이지보다 작거나 같으면 입장
         {
             SceneManager.LoadScene(_stage);
         }
