@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: c06476d508bc05a48afcd5951689a713, type: 3}
-  _type: 1
+  _type: 8
   agents: []
+  isMove: 0
