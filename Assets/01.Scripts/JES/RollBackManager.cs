@@ -32,7 +32,6 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         List<RollBackData> dataList = new List<RollBackData>();
         dataList = _rollBackStack.Pop();
         
-        List<Agent> agents = new List<Agent>();
         foreach (var data in dataList)
         {
             if (data.offObj!=null)
