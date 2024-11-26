@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SnowRock
   m_EditorClassIdentifier: 
   _sprite: {fileID: 8358065363405500924, guid: b2be59c8f41d2cb41bf123c75dc84628, type: 3}
-  _type: 10
+  _type: 7
   agents: []
   isMove: 0
