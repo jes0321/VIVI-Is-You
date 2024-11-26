@@ -34,7 +34,6 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     public void ToggleAttribueCollider(AttributeType type, bool value)
     {
-        
         switch (type)
         {
             case AttributeType.Win:
@@ -58,80 +57,61 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        TriggerEvent(other);
+        if (other.TryGetComponent<Agent>(out Agent agent))
+            TriggerEvent(agent);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _triggerAgent = null;
+        
+         _triggerAgent = null;
     }
 
-    private void TriggerEvent(Collider2D other)
+    private void TriggerEvent(Agent agent)
     {
         if(isRollback) return;
-
-        if (other.TryGetComponent<Agent>(out Agent agent))
+        
+        _triggerAgent = agent;
+        if (_isSink)
         {
-            _triggerAgent = agent;
-            if (_isSink)
+            if (agent.Collider != _agent.Collider)
             {
-                if (other != _agent.Collider)
-                {
-                    AgentOffEvent(agent);
-                    AgentOffEvent(_agent);
-                }
+                AgentOffEvent(agent);
+                AgentOffEvent(_agent);
             }
-            else if (_isDefeat && agent._isYouState)
+        }
+        else if (_isDefeat && agent._isYouState)
+        {
+            AgentOffEvent(agent);
+            AgentOffEvent(_agent);
+            AgentOnEvent(_agent);
+        }
+        else if (_isHot)
+        {
+            if (agent._isMelt)
             {
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
                 AgentOnEvent(_agent);
             }
-            else if (_isHot)
-            {
-                if (agent._isMelt)
-                {
-                    AgentOffEvent(agent);
-                    AgentOffEvent(_agent);
-                    AgentOnEvent(_agent);
-                }
-            } 
-            else if (_isShut)
-            {
-                if (agent._isOpen)
-                {
-                    AgentOffEvent(agent);
-                    AgentOffEvent(_agent);
-                }
-            }
-            else if (_isWin && agent._isYouState) 
-                WinActionEvent(agent);
-        }
-    }
-
-    private void Update()
-    {
-        if (_isShut&&_agent._isOpen)
+        } 
+        else if (_isShut)
         {
-            AgentOffEvent(_agent);
-        }
-
-        if (_isWin && _agent._isYouState)
-        {
-            WinActionEvent(_agent);
-        }
-
-        if (_triggerAgent != null)
-        {
-            if (_isShut&&_triggerAgent._isOpen)
+            if (agent._isOpen)
             {
+                AgentOffEvent(agent);
                 AgentOffEvent(_agent);
             }
-
-            if (_isWin && _triggerAgent._isYouState)
-            {
-                WinActionEvent(_triggerAgent);
-            }
+        }
+        else if (_isWin && agent._isYouState) 
+            WinActionEvent(agent);
+    }
+    private void Update()
+    {
+        TriggerEvent(_agent);
+        if (_triggerAgent != null)
+        {
+            TriggerEvent(_triggerAgent);
         }
     }
 

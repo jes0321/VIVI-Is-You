@@ -38,7 +38,6 @@ public class BtnEnable : MonoBehaviour
     {
         if (_currentStage >= _btnNum && IsTimeEnd)
         {
-            Debug.Log("����");
             SceneManager.LoadScene(_stage);
         }
     }
