@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 383744922774239917, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: AgentType
       value: 
-      objectReference: {fileID: 11400000, guid: 64a225fb87336c64daa3cb44046944e6, type: 2}
+      objectReference: {fileID: 11400000, guid: aa12d100d2a00514e8c037437da48b6d, type: 2}
     - target: {fileID: 5288707398002353688, guid: bdb74c27d0d83ba438497dd07a992150, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

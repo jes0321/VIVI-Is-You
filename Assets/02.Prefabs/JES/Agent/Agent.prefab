@@ -92,11 +92,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e834a9f37cd243068c87487eb288089d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
   _isWin: 0
   _isDefeat: 0
   _isHot: 0
   _isSink: 0
   _isShut: 0
+  isRollback: 0
 --- !u!50 &5525649865411780189
 Rigidbody2D:
   serializedVersion: 5
