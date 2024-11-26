@@ -37,15 +37,21 @@ public class Agent : MonoBehaviour, IPushable
     private void OnEnable()
     {
         inputReader.OnMovementEvent += HandleOnMovement;
+        inputReader.OnTurnEndEvent += ()=>AgentType.isMove=false;
     }
     private void OnDisable()
     {
         inputReader.OnMovementEvent -= HandleOnMovement;
+        inputReader.OnTurnEndEvent -= ()=>AgentType.isMove=false;
     }
     private void HandleOnMovement(Vector2 obj)
     {
         if(!_isYouState) return;
-        RollBackManager.Instance.ListReset();
+        if (!AgentType.isMove)
+        {
+            RollBackManager.Instance.ListReset();
+            AgentType.isMove = true;
+        }
         if(_isOff) return;
         if (MoveObject(obj))
         {
