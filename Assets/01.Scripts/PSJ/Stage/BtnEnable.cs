@@ -9,7 +9,7 @@ public class BtnEnable : MonoBehaviour
     private TextMeshProUGUI _text;
     [SerializeField] private GameObject _image;
     private int _btnNum, _currentStage;
-    private bool IsTimeEnd = false;
+    private bool IsTimeEnd = true;
     private string _effectName = "Unlock";
     private string _stage => _btnNum.ToString();
 
@@ -29,15 +29,16 @@ public class BtnEnable : MonoBehaviour
         if (btnStage == currentStage && isFirst)
         {
             StartCoroutine(UnlockStage());
+            StartCoroutine(Timer());
+            IsTimeEnd = false;
         }
-        StartCoroutine(Timer());
     }
 
     public void EnterStage()
     {
         if (_currentStage >= _btnNum && IsTimeEnd)
         {
-            Debug.Log("ÀÔÀå");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
             SceneManager.LoadScene(_stage);
         }
     }
