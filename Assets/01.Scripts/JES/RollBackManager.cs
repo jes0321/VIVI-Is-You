@@ -12,9 +12,11 @@ public class RollBackManager : MonoSingleton<RollBackManager>
     private Stack<List<RollBackData>> _rollBackStack = new Stack<List<RollBackData>>();
     public Action OnDestroyEvent;
     private List<RollBackData> _dummyList = new List<RollBackData>();
+    private List<Agent> _agentList = new List<Agent>();
     private void Awake()
     {
         _inputReader.OnRollbackEvent += HandleRollback;
+        _inputReader.OnRollbackEndEvent += AgentColliderOn;
     }
 
     private void OnDisable()
@@ -35,7 +37,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
         {
             if (data.offObj!=null)
             {
-                agents.Add(data.offObj);
+                _agentList.Add(data.offObj);
                 data.offObj.GetCompo<VerbCollider>().isRollback = true;
                 data.offObj.gameObject.SetActive(true);
             }
@@ -52,11 +54,16 @@ public class RollBackManager : MonoSingleton<RollBackManager>
             } 
         }
 
-        foreach (var agent in agents)
+        _lastTime = Time.time;
+    }
+
+    private void AgentColliderOn()
+    {
+        foreach (var agent in _agentList)
         {
             agent.GetCompo<VerbCollider>().isRollback = false;
         }
-        _lastTime = Time.time;
+        _agentList.Clear();
     }
 
     public void AddRollback(MoveCompo moveCompo, Vector2 dir, Agent go=null)
