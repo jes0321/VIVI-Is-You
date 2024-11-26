@@ -52,6 +52,7 @@ public class RollBackManager : MonoSingleton<RollBackManager>
                 data.subject.VerbCancel(new List<Agent>());
             }
 
+            if (data.moveDir == Vector2.zero) continue;
             if (data.moveCompo.MoveAgent(data.moveDir, true)) continue;
             
             _rollBackStack.Push(dataList);
