@@ -7957,6 +7957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockSubject
       objectReference: {fileID: 0}
+    - target: {fileID: 6659232883757974090, guid: 8833e224597476e43b538fd2e105eda8, type: 3}
+      propertyPath: _agentData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8549eabd491606747bc144dc843cef93, type: 2}
     - target: {fileID: 7565203796404480536, guid: 8833e224597476e43b538fd2e105eda8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.5
