@@ -57,10 +57,10 @@ EditorBuildSettings:
     path: Assets/00.Scenes/Main/Stage/13.unity
     guid: 51be5d2b6e723d7488ded60761b63120
   - enabled: 1
-    path: Assets/00.Scenes/Main/Stage/14.unity
+    path: Assets/00.Scenes/Main/Stage/13.unity
     guid: 751ea22b028992341a6751661a128fc1
   - enabled: 1
-    path: Assets/00.Scenes/Main/Stage/15.unity
+    path: Assets/00.Scenes/Main/Stage/14.unity
     guid: f47fc3019df53454e8640fe3aa276c6f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f6a2abc217655244287d8582a763615d, type: 3}
