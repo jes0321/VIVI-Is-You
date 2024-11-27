@@ -173,6 +173,14 @@ public class Subject : Object, IVerbable
 
     public bool IsApply(Vector2 direction, IVerbable verbAble)
     {
+        Subject sub = verbAble as Subject;
+        if ( sub!= null)
+        {
+            if (sub._agentData == _agentData)
+            {
+                return false;
+            }
+        }
         VerbApply info =  _isVerbApplyInfoDic[direction];
         if (!info.IsApply.Value)
         {

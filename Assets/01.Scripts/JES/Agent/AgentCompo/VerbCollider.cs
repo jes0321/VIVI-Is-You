@@ -87,7 +87,9 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
         {
             AgentOffEvent(agent);
             AgentOffEvent(_agent);
-            AgentOnEvent(_agent);
+            if(agent!=_agent)
+                AgentOnEvent(_agent);
+            
             return;
         }
         if (_isHot)
@@ -96,7 +98,8 @@ public class VerbCollider : MonoBehaviour, IAgentCompo
             {
                 AgentOffEvent(agent);
                 AgentOffEvent(_agent);
-                AgentOnEvent(_agent);
+                if(agent!=_agent)
+                    AgentOnEvent(_agent);
                 return;
             }
         } 
