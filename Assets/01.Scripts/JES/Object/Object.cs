@@ -15,7 +15,7 @@ public class Object : MonoBehaviour,IPushable
     {
        return _moveCompo.MoveAgent(dir);
     }
-}
+}   
 
 public enum VerbType
 {

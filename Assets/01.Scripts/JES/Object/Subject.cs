@@ -60,34 +60,6 @@ public class Subject : Object, IVerbable
         RollBackManager.Instance.AddTransSubject(this);
         agents.Clear();
     }
-
-    private void TransAgentVerbCancel(List<Agent> agents)
-    {
-        _transData.verbs.ForEach(verb =>
-        {
-            verb.VerbCancel(agents);
-        });
-    }
-
-    private void TransAgent(List<Agent> agents)
-    {
-        if(agents.Count == 0) return;
-        _transData = agents[0].AgentType;
-        agents.ForEach(agent =>
-        {
-            _transAgents.Add(agent);
-            
-            agent.UpdateData(_agentData);
-            _agentData.agents.Add(agent);
-        });
-    }
-    private void TransAgentVerbApply(List<Agent> agents)
-    {
-        foreach (var t in _agentData.verbs)
-        {
-            t.VerbApply(agents);
-        }
-    }
     public void VerbCancel(List<Agent> agents)
     {
         if (_isRollback)
@@ -123,6 +95,34 @@ public class Subject : Object, IVerbable
             _transData = null;
         }
     }
+    private void TransAgentVerbCancel(List<Agent> agents)
+    {
+        _transData.verbs.ForEach(verb =>
+        {
+            verb.VerbCancel(agents);
+        });
+    }
+
+    private void TransAgent(List<Agent> agents)
+    {
+        if(agents.Count == 0) return;
+        _transData = agents[0].AgentType;
+        agents.ForEach(agent =>
+        {
+            _transAgents.Add(agent);
+            
+            agent.UpdateData(_agentData);
+            _agentData.agents.Add(agent);
+        });
+    }
+    private void TransAgentVerbApply(List<Agent> agents)
+    {
+        foreach (var t in _agentData.verbs)
+        {
+            t.VerbApply(agents);
+        }
+    }
+    
     private void DirectObject()
     {
         foreach (var data in _isVerbApplyInfoDic)

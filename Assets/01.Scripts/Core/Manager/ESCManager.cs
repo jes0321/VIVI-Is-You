@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,30 +14,25 @@ public class ESCManager : MonoBehaviour
     private bool _isEscOpen = false;
     private void Start()
     {
-        BGM.value = DataManger.Instance.saveData.bgmVol;
-        SFX.value = DataManger.Instance.saveData.sfxVol;
-        Master.value = DataManger.Instance.saveData.masterVol;
+        //저장 관련 처리 해줘야함
     }
 
     public void SFXSoundChange(float value)
     {
-         DataManger.Instance.saveData.sfxVol = value;
         _audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
     }
     public void BGMSoundChange(float value)
     {
-        DataManger.Instance.saveData.bgmVol = value;
         _audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
     }
     public void MasterSoundChange(float value)
     {
-        DataManger.Instance.saveData.masterVol = value;
         _audioMixer.SetFloat("MasterParam", Mathf.Log10(value) * 20);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             EscOnOff(_isEscOpen);
         }

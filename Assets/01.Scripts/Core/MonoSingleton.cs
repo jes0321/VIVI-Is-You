@@ -3,30 +3,46 @@ using UnityEngine;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance = null;
+    [Header("MonoSingleton")]
+    [Tooltip("Dont Destroy on Scene Change")]
+    [SerializeField] bool isDontDestroy = false;
+    [Space(1)] 
+    private static T _instace = null;
     private static bool IsDestroyed = false;
-    
     public static T Instance
     {
         get
         {
             if (IsDestroyed)
-                _instance = null;
-
-            if (_instance == null)
+                _instace = null;
+            if (_instace == null)
             {
-                _instance =  FindFirstObjectByType<T>();
-                if (_instance == null)
-                    Debug.LogError($"{typeof(T).Name} singleton is not exist");
+                _instace = GameObject.FindAnyObjectByType<T>();
+                if (_instace == null)
+                    throw new Exception("바보같은! 싱글톤이 없어!");
                 else
-                {
                     IsDestroyed = false;
-                }
             }
-            return _instance;
+            return _instace;
         }
     }
-
+    protected virtual void Awake()
+    {
+        if (_instace == null)
+        {
+            _instace = this as T;
+            if (isDontDestroy)
+                DontDestroyOnLoad(gameObject);
+        }
+        else if (_instace != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     private void OnDisable()
     {
         IsDestroyed = true;
