@@ -52,6 +52,8 @@ public class SoundPlayer : MonoBehaviour, IPoolable
         PoolManager.Instance.Push(this);
     }
 
+    public void PlaySound() => _audioSource.Play();
+    public void StopSound() => _audioSource.Stop();
     public string PoolName => _poolName;
     public GameObject ObjectPrefab => gameObject;
 
