@@ -31,7 +31,7 @@ public abstract class Verb : Object
         ShootRayAndApply(-Vector2.right);
         ShootRayAndApply(Vector2.up);
     }
-
+    
     public IVerbable ShootRayAndCancel(Vector2 direction)
     {
         Vector3 padding = new Vector3(direction.x * 0.5f, direction.y * 0.5f, 0);
@@ -43,7 +43,10 @@ public abstract class Verb : Object
         }
         return null;
     }
-    
+    /// <summary>
+    /// 레이를 쏴서 양쪽을 감지해서 적
+    /// </summary>
+    /// <param name="dir">방향</param>
     private void ShootRayAndApply(Vector2 dir)          
     {
         Vector3 padding = new Vector3(dir.x * 0.5f, dir.y * 0.5f, 0);
